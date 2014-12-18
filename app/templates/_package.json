@@ -1,0 +1,43 @@
+{
+  "name": "<%= _.slugify(appname) %>",
+  "version": "0.0.0",
+  "description": "<%= _.slugify(manifest.description) %>",
+  "main": "index.js",
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "scripts": {
+    "watch": "./node_modules/.bin/gulp watch",
+    "build": "./node_modules/.bin/gulp build",
+    "release": "./node_modules/.bin/gulp release"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^7.0.2",
+    "del": "^1.1.0",
+    "glob": "^4.3.1",
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.2",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.0.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-json-transform": "^0.2.0",
+    "gulp-less": "^2.0.1",
+    "gulp-livereload": "^3.0.2",
+    "gulp-sourcemaps": "^1.2.8",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "^3.0.1",
+    "gulp-watch": "^3.0.0",
+    "gulp-zip": "^2.0.2",
+    "jshint-stylish": "^1.0.0",
+    "less-plugin-autoprefix": "^1.0.1",
+    "less-plugin-clean-css": "^1.2.0",
+    "minimist": "^1.1.0",
+    "require-dir": "^0.1.0",
+    "run-sequence": "^1.0.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
+  }
+}

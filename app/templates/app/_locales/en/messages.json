@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "<%= manifest.name %>",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "<%= manifest.shortName %>",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "<%= manifest.description %>",
+    "description": "The description of the application"
+  }
+}
