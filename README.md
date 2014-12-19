@@ -91,8 +91,8 @@ It use [watchify](https://www.npmjs.com/package/watchify), chromereload (liverel
 
 To use chromereload just load and execute the generated `chromereload.js`:
 
-		// background.js
-		require('./lib/chromereload')();
+	// background.js
+	require('./lib/chromereload')();
 
 ### Build
 
