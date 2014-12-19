@@ -16,9 +16,8 @@ var watchify = require('watchify');
 /***********************************************************
  * Configue
  ***********************************************************/
-var SRC = 'app/scripts/*.js';
-var DEST = 'dist/scripts';
-var LIVERELOAD_PORT = 35729;
+var src = 'app/scripts/*.js';
+var dest = 'dist/scripts';
 
 /***********************************************************
  * Watch
@@ -39,7 +38,7 @@ function bundle(b, filename, development) {
     .pipe(gulpif(!development, uglify()))
 
     // Save
-    .pipe(gulp.dest(DEST))
+    .pipe(gulp.dest(dest))
 
     // Trigger livereload
     .pipe(gulpif(development, livereload()));
@@ -96,11 +95,10 @@ function buildBundles(src, development) {
 }
 
 gulp.task('scripts', function() {
-  buildBundles(SRC);
+  buildBundles(src);
 });
 
 gulp.task('scripts:dev', function() {
-  livereload.listen(LIVERELOAD_PORT);
-  gutil.log('Chromereload listen on port', LIVERELOAD_PORT);
-  buildBundles(SRC, true);
+  livereload.listen();
+  buildBundles(src, true);
 });

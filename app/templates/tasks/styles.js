@@ -4,6 +4,7 @@ var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
 var LessPluginCleanCSS = require("less-plugin-clean-css");
 var LessPluginAutoPrefix = require('less-plugin-autoprefix');
+var livereload = require('gulp-livereload');
 
 /***********************************************************
  * Configue
@@ -37,6 +38,7 @@ gulp.task('styles', function() {
  * Watch
  ***********************************************************/
 gulp.task('styles:dev', function() {
+  livereload.listen();
   return gulp.src(src)
     .pipe(watch(src))
     // .pipe(sourcemaps.init())
@@ -44,5 +46,7 @@ gulp.task('styles:dev', function() {
       plugins: [autoprefix]
     }))
     // .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest))
+    // Livereload
+    .pipe(livereload());
 });
