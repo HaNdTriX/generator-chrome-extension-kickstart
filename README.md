@@ -4,7 +4,7 @@ Chrome Extension generator that creates everything you need to get started with 
 
 ## Differences to [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension)
 
-This generator uses gulp and CommonJS modules. 
+This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browserify.org/). 
 You can only load the `dist` directory as an extension. Don't try to load the `app` directory!
 In addition to that it supports a more options.
 
