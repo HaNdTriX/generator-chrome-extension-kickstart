@@ -1,12 +1,7 @@
 # generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart)
 
 Chrome Extension generator that creates everything you need to get started with extension development. 
-
-## Differences to [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension)
-
-This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browserify.org/). 
-You can only load the `dist` directory as an extension. Don't try to load the `app` directory!
-In addition to that it supports a more options.
+This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browserify.org/).
 
 ## Install
 
