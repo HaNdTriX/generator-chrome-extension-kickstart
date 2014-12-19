@@ -6,7 +6,7 @@ Chrome Extension generator that creates everything you need to get started with 
 
 This generator uses gulp and CommonJS modules. 
 You can only load the `dist` directory as an extension. Don't try to load the `app` directory!
-In addition to that I supports a more options.
+In addition to that it supports a more options.
 
 ## Install
 
