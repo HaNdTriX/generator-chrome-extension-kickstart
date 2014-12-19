@@ -74,7 +74,7 @@ In addition to that I supports a more options.
 
 Sets up a new Chrome Extension, generating all the boilerplate you need to get started.
 
-  yo chrome-extension-kickstart
+    yo chrome-extension-kickstart
 
 ## Test Chrome Extension
 
@@ -92,10 +92,6 @@ Watches all files in the app directory and starts a fast build if a file was mod
 It uses sourcemaps and watchify.
 
 	$ npm run watch
-	
-or
-
-	$ gulp watch
 
 
 ### Build
@@ -103,10 +99,7 @@ or
 Use for production.
 
 	$ npm run build
-	
-or
 
-	$ gulp build
 
 ### Release
 
@@ -115,12 +108,7 @@ Increments the manifest version, builds the extension and packs it into a `.zip`
 Use:
 
 	$ npm run release
-	
-or
-
-	$ gulp release
-
-
+  
 
 ## Options
 
