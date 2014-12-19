@@ -24,4 +24,4 @@ Before release run:
 
 To see all available tasks run:
 
-  $ gulp -T
+    $ gulp -T
