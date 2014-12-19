@@ -10,7 +10,7 @@ This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browse
 ## Getting Started
 
 - First make a new directory, and `cd` into it: `mkdir my-new-chrome-extension && cd $_`
-- Run: `yo chrome-extension`, optionally passing an extension name: yo chrome-extension
+- Run: `yo chrome-extension-kickstart`.
 
 ## Options
 
