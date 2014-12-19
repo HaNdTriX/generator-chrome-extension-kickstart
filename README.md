@@ -14,6 +14,13 @@ This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browse
 
 ## Options
 
+* `--skip-install`
+
+  Skips the automatic execution of `npm` after
+  scaffolding has finished.
+  
+## Chrome API Support
+
 * Browser UI:
   * [Browser Action](https://developer.chrome.com/extensions/browserAction)
   * [Page Action](https://developer.chrome.com/extensions/pageAction)
@@ -64,13 +71,7 @@ This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browse
   * [TabCapture](https://developer.chrome.com/extensions/tabCapture)
   * [tts](https://developer.chrome.com/extensions/tts)
 
-
-## App
-
-Sets up a new Chrome Extension, generating all the boilerplate you need to get started.
-
-    yo chrome-extension-kickstart
-
+  
 ## Test Chrome Extension
 
 To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as an unpacked extension.
@@ -84,10 +85,14 @@ To modify your tasks check out the `tasks` directory of your generated extension
 
 Use for development.
 Watches all files in the app directory and starts a fast build if a file was modified.
-It uses sourcemaps and watchify.
+It use [watchify](https://www.npmjs.com/package/watchify), chromereload (livereload) and [sourcemaps](https://github.com/ryanseddon/source-map/wiki/Source-maps:-languages,-tools-and-other-info).
 
 	$ npm run watch
 
+To use chromereload just load and execute the generated `chromereload.js`:
+
+		// background.js
+		require('./lib/chromereload')();
 
 ### Build
 
@@ -103,17 +108,9 @@ Increments the manifest version, builds the extension and packs it into a `.zip`
 Use:
 
 	$ npm run release
-  
-
-## Options
-
-* `--skip-install`
-
-  Skips the automatic execution of `bower` and `npm` after
-  scaffolding has finished.
 
 
-## TODO
+## Todo
 
 * Add tests
 
