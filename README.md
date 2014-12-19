@@ -5,7 +5,7 @@ This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browse
 
 ## Install
 
-  $ npm install -g yo generator-chrome-extension-kickstart
+	$ npm install -g yo generator-chrome-extension-kickstart
 
 ## Getting Started
 
