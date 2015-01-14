@@ -45,6 +45,11 @@ gulp.task('styles:dev', function() {
     .pipe(less({
       plugins: [autoprefix]
     }))
+    .on('error', function (err) {
+      var displayErr = gutil.colors.red(err);
+      gutil.log(displayErr);
+      gutil.beep();
+    })
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest(dest))
     // Livereload
