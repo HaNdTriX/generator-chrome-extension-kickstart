@@ -3,6 +3,12 @@
 Chrome Extension generator that creates everything you need to get started with extension development. 
 This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browserify.org/).
 
+
+## Warning
+
+This generator is still in active development and things will change!
+So use it at your own risk!
+
 ## Install
 
 	$ npm install -g yo generator-chrome-extension-kickstart
