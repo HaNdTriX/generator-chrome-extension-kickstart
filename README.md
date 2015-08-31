@@ -86,7 +86,7 @@ To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as 
 
 ### Build
 
-  $ gulp
+    $ gulp
 
 | Option         | Description                                                                                                                                       |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
