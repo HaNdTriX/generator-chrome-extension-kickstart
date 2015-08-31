@@ -35,7 +35,7 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'description',
       message: 'How would you like to describe this extension?',
-      default: 'My Chrome Extension'
+      default: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }, {
       type: 'list',
       name: 'action',
@@ -315,17 +315,21 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     gulpfile: function() {
-      this.template('gulpfile.js', 'gulpfile.js');
+      this.template('gulpfile.babel.js', 'gulpfile.babel.js');
+
       this.copy('tasks/clean.js', 'tasks/clean.js');
+      this.copy('tasks/compress.js', 'tasks/compress.js');
+      this.copy('tasks/default.js', 'tasks/default.js');
       this.copy('tasks/fonts.js', 'tasks/fonts.js');
-      this.copy('tasks/generate_lang.js', 'tasks/generate.js');
-      this.copy('tasks/html.js', 'tasks/html.js');
       this.copy('tasks/images.js', 'tasks/images.js');
+      this.copy('tasks/livereload.js', 'tasks/livereload.js');
       this.copy('tasks/locales.js', 'tasks/locales.js');
       this.copy('tasks/manifest.js', 'tasks/manifest.js');
-      this.template('tasks/package.js', 'tasks/package.js');
+      this.copy('tasks/pages.js', 'tasks/pages.js');
       this.copy('tasks/scripts.js', 'tasks/scripts.js');
       this.copy('tasks/styles.js', 'tasks/styles.js');
+      this.copy('tasks/version.js', 'tasks/version.js');
+
     },
 
     packageJSON: function() {
@@ -341,6 +345,10 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('gitattributes', '.gitattributes');
     },
 
+    eslint: function() {
+      this.copy('eslintrc', '.eslintrc');
+    },
+
     artworks: function() {
       this.mkdir('artworks');
       this.copy('artworks/Chrome-Webstore-Icon_128x128.png', 'artworks/Chrome-Webstore-Icon_128x128.png');
@@ -349,10 +357,6 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('artworks/Promo-Image-Small_440x280.png', 'artworks/Promo-Image-Small_440x280.png');
       this.copy('artworks/Screenshot_1280x800.png', 'artworks/Screenshot_1280x800.png');
       this.copy('artworks/Screenshot_640x400.png', 'artworks/Screenshot_640x400.png');
-    },
-
-    jshint: function() {
-      this.copy('jshintrc', '.jshintrc');
     },
 
     editorConfig: function() {
@@ -376,7 +380,7 @@ module.exports = yeoman.generators.Base.extend({
             38: 'images/icon-38.png'
           },
           default_title: this.manifest.name,
-          default_popup: 'html/popup.html'
+          default_popup: 'pages/popup.html'
         };
         var title = (this.manifest.action === 1) ? 'browser_action' : 'page_action';
         manifest[title] = buildJSONPart(action);
@@ -384,13 +388,13 @@ module.exports = yeoman.generators.Base.extend({
 
       // add options page field.
       if (this.manifest.options) {
-        manifest.options_page = '"html/options.html"';
+        manifest.options_page = '"pages/options.html"';
       }
 
       // add devtool page field.
       if (this.manifest.devtoolsPage) {
         manifest.minimum_chrome_version = '"10.0"';
-        manifest.devtools_page = '"html/devtools.html"';
+        manifest.devtools_page = '"pages/devtools.html"';
       }
 
       // Override Pages
@@ -399,21 +403,21 @@ module.exports = yeoman.generators.Base.extend({
         // add history page field.
         if (this.manifest.historyPage) {
           manifest.chrome_url_overrides = buildJSONPart({
-            history_page: 'html/history.html'
+            history: 'pages/history.html'
           });
         }
 
         // add bookmarks page field.
         if (this.manifest.bookmarksPage) {
           manifest.chrome_url_overrides = buildJSONPart({
-            bookmarks: 'html/bookmarks.html'
+            bookmarks: 'pages/bookmarks.html'
           });
         }
 
         // add newtab page field.
         if (this.manifest.newtabPage) {
           manifest.chrome_url_overrides = buildJSONPart({
-            newtab: 'html/newtab.html'
+            newtab: 'pages/newtab.html'
           });
         }
 
@@ -430,8 +434,8 @@ module.exports = yeoman.generators.Base.extend({
       if (this.manifest.contentscript) {
         var contentscript = [{
           matches: ['http://*/*', 'https://*/*'],
-          css: ['styles/content.css'],
-          js: ['scripts/content.js'],
+          css: ['styles/contentscript.css'],
+          js: ['contentscript.js'],
           run_at: 'document_end',
           all_frames: false
         }];
@@ -470,8 +474,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/popup.html', 'app/html/popup.html');
-      this.copy('app/scripts/popup.js', 'app/scripts/popup.js');
+      this.copy('app/pages/popup.html', 'app/pages/popup.html');
+      this.copy('app/popup.js', 'app/popup.js');
       this.copy('app/styles/popup.less', 'app/styles/popup.less');
       this.copy('app/images/icon-19.png', 'app/images/icon-19.png');
       this.copy('app/images/icon-38.png', 'app/images/icon-38.png');
@@ -486,9 +490,9 @@ module.exports = yeoman.generators.Base.extend({
         backgroundjs = 'background.browseraction.js';
       }
 
-      this.copy('app/scripts/' + backgroundjs, 'app/scripts/background.js');
-      this.copy('app/scripts/lib/chromereload.js', 'app/scripts/lib/chromereload.js');
-      this.copy('app/scripts/lib/translateMarkup.js', 'app/scripts/lib/translateMarkup.js');
+      this.copy('app/' + backgroundjs, 'app/background.js');
+      this.copy('app/lib/chromereload.js', 'app/lib/chromereload.js');
+      this.copy('app/lib/livereload.js', 'app/lib/livereload.js');
     },
 
     options: function() {
@@ -496,8 +500,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/options.html', 'app/html/options.html');
-      this.copy('app/scripts/options.js', 'app/scripts/options.js');
+      this.copy('app/pages/options.html', 'app/pages/options.html');
+      this.copy('app/options.js', 'app/options.js');
       this.copy('app/styles/options.less', 'app/styles/options.less');
     },
 
@@ -506,8 +510,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/devtools.html', 'app/html/devtools.html');
-      this.copy('app/scripts/devtools.js', 'app/scripts/devtools.js');
+      this.copy('app/pages/devtools.html', 'app/pages/devtools.html');
+      this.copy('app/devtools.js', 'app/devtools.js');
       this.copy('app/styles/devtools.less', 'app/styles/devtools.less');
     },
 
@@ -516,8 +520,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/history.html', 'app/html/history.html');
-      this.copy('app/scripts/history.js', 'app/scripts/history.js');
+      this.copy('app/pages/history.html', 'app/pages/history.html');
+      this.copy('app/history.js', 'app/history.js');
       this.copy('app/styles/history.less', 'app/styles/history.less');
     },
 
@@ -526,8 +530,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/bookmarks.html', 'app/html/bookmarks.html');
-      this.copy('app/scripts/bookmarks.js', 'app/scripts/bookmarks.js');
+      this.copy('app/pages/bookmarks.html', 'app/pages/bookmarks.html');
+      this.copy('app/bookmarks.js', 'app/bookmarks.js');
       this.copy('app/styles/bookmarks.less', 'app/styles/bookmarks.less');
     },
 
@@ -536,8 +540,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/html/newtab.html', 'app/html/newtab.html');
-      this.copy('app/scripts/newtab.js', 'app/scripts/newtab.js');
+      this.copy('app/pages/newtab.html', 'app/pages/newtab.html');
+      this.copy('app/newtab.js', 'app/newtab.js');
       this.copy('app/styles/newtab.less', 'app/styles/newtab.less');
     },
 
@@ -546,14 +550,15 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/scripts/content.js', 'app/scripts/content.js');
-      this.copy('app/styles/content.less', 'app/styles/content.less');
+      this.copy('app/contentscript.js', 'app/contentscript.js');
+      this.copy('app/styles/contentscript.less', 'app/styles/contentscript.less');
     },
 
     assets: function() {
       this.template('app/_locales/en/messages.json', 'app/_locales/en/messages.json');
       this.copy('app/images/icon-16.png', 'app/images/icon-16.png');
       this.copy('app/images/icon-128.png', 'app/images/icon-128.png');
+      this.copy('app/images/icon-large.svg', 'app/images/icon-large.svg');
       this.copy('app/fonts/gitkeep', 'app/fonts/.gitkeep');
     }
   },
@@ -565,7 +570,7 @@ module.exports = yeoman.generators.Base.extend({
       npm: true,
       skipInstall: this.options['skip-install'],
       callback: function() {
-        self.log(yosay('Please run ' + chalk.red('npm run watch') + ' or  ' + chalk.yellow('npm run build') + ' and load the generated dist into chrome.'));
+        self.log(yosay('Please run ' + chalk.red('gulp') + ' or  ' + chalk.yellow('gulp --watch') + ' and load the generated dist into chrome.'));
       }
     });
   }

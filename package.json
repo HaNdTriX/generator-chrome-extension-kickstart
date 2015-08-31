@@ -1,6 +1,6 @@
 {
   "name": "generator-chrome-extension-kickstart",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Yeoman generator",
   "license": "BSD",
   "main": "app/index.js",
@@ -20,7 +20,8 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "webpack"
   ],
   "dependencies": {
     "yeoman-generator": "^0.18.0",

@@ -1,4 +1,8 @@
-node_modules
-dist
-tmp
+
 .DS_Store
+
+node_modules
+npm-debug.log
+
+dist/
+packages/

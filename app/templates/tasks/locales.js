@@ -1,25 +1,13 @@
-var gulp = require('gulp');
-var watch = require('gulp-watch');
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import livereload from 'gulp-livereload';
+import yargs from 'yargs';
 
-/***********************************************************
- * Configue
- ***********************************************************/
-var src = 'app/_locales/**/*';
-var dest = 'dist/_locales';
+let argv = yargs.argv;
+let watch = !!argv.watch;
 
-/***********************************************************
- * Build
- ***********************************************************/
-gulp.task('locales', function() {
-  return gulp.src(src)
-    .pipe(gulp.dest(dest));
-});
-
-/***********************************************************
- * Watch
- ***********************************************************/
-gulp.task('locales:dev', function() {
-  return gulp.src(src)
-    .pipe(watch(src))
-    .pipe(gulp.dest(dest));
+gulp.task('locales', () => {
+  gulp.src('app/_locales/**/*')
+    .pipe(gulp.dest('dist/_locales'))
+    .pipe(gulpif(watch, livereload()));
 });

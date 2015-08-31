@@ -1,57 +1,53 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var watch = require('gulp-watch');
-var sourcemaps = require('gulp-sourcemaps');
-var LessPluginCleanCSS = require("less-plugin-clean-css");
-var LessPluginAutoPrefix = require('less-plugin-autoprefix');
-var livereload = require('gulp-livereload');
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import gutil from 'gulp-util';
+import plumber from 'gulp-plumber';
+import sourcemaps from 'gulp-sourcemaps';
+import less from 'gulp-less';
+import sass from 'gulp-sass';
+import minifyCSS from 'gulp-minify-css';
+import livereload from 'gulp-livereload';
+import yargs from 'yargs';
 
-/***********************************************************
- * Configue
- ***********************************************************/
-var src = [
-  'app/styles/**/*.less',
-  '!app/styles/**/*.import.less',
-];
-var dest = 'dist/styles';
+let argv = yargs.argv;
+let production = !!argv.production;
+let watch = !!argv.watch;
 
-var cleancss = new LessPluginCleanCSS({
-  advanced: true
+gulp.task('styles:css', function() {
+  return gulp.src('app/styles/*.css')
+    .pipe(gulpif(production, minifyCSS()))
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulpif(watch, livereload()));
 });
 
-var autoprefix = new LessPluginAutoPrefix({
-  browsers: ["last 2 versions"]
-});
-
-/***********************************************************
- * Build
- ***********************************************************/
-gulp.task('styles', function() {
-  return gulp.src(src)
-    .pipe(less({
-      plugins: [autoprefix, cleancss]
+gulp.task('styles:less', function() {
+  return gulp.src('app/styles/*.less')
+    .pipe(gulpif(!production, sourcemaps.init()))
+    .pipe(less().on('error', function(error) {
+      gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+      this.emit('end');
     }))
-    .pipe(gulp.dest(dest));
+    .pipe(gulpif(production, minifyCSS()))
+    .pipe(gulpif(!production, sourcemaps.write()))
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulpif(watch, livereload()));
 });
 
-/***********************************************************
- * Watch
- ***********************************************************/
-gulp.task('styles:dev', function() {
-  livereload.listen();
-  return gulp.src(src)
-    .pipe(watch(src))
-    // .pipe(sourcemaps.init())
-    .pipe(less({
-      plugins: [autoprefix]
+gulp.task('styles:sass', function() {
+  return gulp.src('app/styles/*.scss')
+    .pipe(gulpif(!production, sourcemaps.init()))
+    .pipe(sass().on('error', function(error) {
+      gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+      this.emit('end');
     }))
-    .on('error', function (err) {
-      var displayErr = gutil.colors.red(err);
-      gutil.log(displayErr);
-      gutil.beep();
-    })
-    // .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dest))
-    // Livereload
-    .pipe(livereload());
+    .pipe(gulpif(production, minifyCSS()))
+    .pipe(gulpif(!production, sourcemaps.write()))
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulpif(watch, livereload()));
 });
+
+gulp.task('styles', [
+  'styles:css',
+  'styles:less',
+  'styles:sass'
+]);

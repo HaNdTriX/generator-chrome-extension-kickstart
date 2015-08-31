@@ -1,104 +1,90 @@
-var browserify = require('browserify');
-var buffer = require('vinyl-buffer');
-var glob = require('glob');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
-var livereload = require('gulp-livereload');
-var path = require('path');
-var source = require('vinyl-source-stream');
-var stylish = require('jshint-stylish');
-var uglify = require('gulp-uglify');
-var watchify = require('watchify');
-// var reactify = require('reactify');
+import gulp from 'gulp';
+import gutil from 'gulp-util';
+import path from 'path';
+import glob from 'glob';
+import _ from 'lodash';
+import webpack from 'webpack';
+import livereload from 'gulp-livereload';
+import yargs from 'yargs';
 
-/***********************************************************
- * Configue
- ***********************************************************/
-var src = 'app/scripts/*.js';
-var dest = 'dist/scripts';
+let argv = yargs.argv;
+let production = !!argv.production;
+let watch = !!argv.watch;
+let verbose = !!argv.verbose;
 
-/***********************************************************
- * Watch
- ***********************************************************/
+let appDir = path.resolve(__dirname, '../app');
 
-
-function bundle(b, filename, development) {
-  return b.bundle()
-
-    // log errors if they happen
-    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-
-    // Gulpify
-    .pipe(source(filename))
-
-    // Uglify
-    .pipe(gulpif(!development, buffer()))
-    .pipe(gulpif(!development, uglify()))
-
-    // Save
-    .pipe(gulp.dest(dest))
-
-    // Trigger livereload
-    .pipe(gulpif(development, livereload()));
-
+function globToEntryMap(...args) {
+  var files = glob.sync(...args)
+  return _(files)
+    .map(function(filePath) {
+      var bundleName = path.basename(filePath, '.js');
+      return [bundleName, `./${filePath}`];
+    })
+    .zipObject()
+    .value();
 }
 
-function browserifyEach(baseFilePath, development) {
+function createWebpackConfig() {
+  return {
+    devtool: production ? null : 'inline-source-map',
+    watch: watch,
+    context: appDir,
+    entry: globToEntryMap('*.js', {
+      cwd: appDir
+    }),
+    output: {
+      path: 'dist',
+      filename: '[name].js'
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'ENV': JSON.stringify(production ? 'production' : 'development')
+      }),
+    ].concat(production ? [
+      new webpack.optimize.UglifyJsPlugin()
+    ] : []),
+    module: {
+      loaders: [{
+        test: /\.js$/,
+        loaders: ['babel'],
+        exclude: /node_modules/
+      }],
+      preLoaders: [{
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      }]
+    },
+    eslint: {
+      configFile: '.eslintrc'
+    }
+  };
+};
 
-  // Get the filename
-  var filename = path.basename(baseFilePath);
+gulp.task('scripts', (cb) => {
+  let styledName = gutil.colors.cyan(`'webpack'`);
+  gutil.log('Starting', styledName);
+  webpack(createWebpackConfig(), (err, stats) => {
+    if (err) throw new gutil.PluginError('webpack', err);
+    gutil.log('Finished', styledName + ':\n', stats.toString({
+      colors: true,
+      reasons: verbose,
+      hash: verbose,
+      version: verbose,
+      timings: verbose,
+      chunks: verbose,
+      chunkModules: verbose,
+      cached: verbose,
+      cachedAssets: verbose,
+      children: verbose
+    }));
 
-  // Configure browserify
-  var b = browserify({
-
-    // Select bundle
-    entries: './' + baseFilePath,
-
-    // Enable Source Maps
-    debug: development,
-
-    // Needed for watchify
-    cache: {},
-    packageCache: {},
-    fullPaths: development
+    if (watch) {
+      livereload.reload()
+    } else {
+      cb();
+    }
 
   });
-
-  if (development) {
-
-    // Watch files
-    b = watchify(b);
-
-    // Rebundle on filechange
-    b.on('update', function(file) {
-      gutil.log(filename, 'changed');
-      bundle(b, filename, development);
-    });
-
-  }
-
-  // Add transforms here
-  // b.transform(reactify);
-
-  bundle(b, filename, development);
-
-}
-
-function buildBundles(src, development) {
-  glob(src, function(err, files) {
-    files.forEach(function(file) {
-      browserifyEach(file, development);
-    });
-  });
-}
-
-gulp.task('scripts', function() {
-  buildBundles(src);
-});
-
-gulp.task('scripts:dev', function() {
-  livereload.listen();
-  buildBundles(src, true);
 });

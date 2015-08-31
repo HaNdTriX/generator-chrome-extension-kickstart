@@ -1,9 +1,6 @@
-var gulp = require('gulp');
-var del = require('del');
+import gulp from 'gulp';
+import del from 'del';
 
-gulp.task('clean', function(cb) {
-  del([
-    'dist/*',
-    'temp'
-  ], cb);
+gulp.task('clean', (cb) => {
+  del('dist/**/*', cb);
 });

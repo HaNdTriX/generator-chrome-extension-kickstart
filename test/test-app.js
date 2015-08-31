@@ -70,7 +70,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'package.json',
       '.editorconfig',
-      '.jshintrc',
+      '.eslintrc',
       '.gitattributes',
       '.gitignore',
       'README.md'
@@ -79,13 +79,19 @@ describe('chrome-extension-kickstart:app', function() {
 
   it('creates tasks', function() {
     assert.file([
-      'gulpfile.js',
+      'gulpfile.babel.js',
       'tasks/clean.js',
+      'tasks/compress.js',
+      'tasks/default.js',
+      'tasks/fonts.js',
       'tasks/images.js',
+      'tasks/livereload.js',
+      'tasks/locales.js',
       'tasks/manifest.js',
-      'tasks/package.js',
+      'tasks/pages.js',
+      'tasks/scripts.js',
       'tasks/styles.js',
-      'tasks/scripts.js'
+      'tasks/version.js'
     ]);
   });
 
@@ -118,53 +124,53 @@ describe('chrome-extension-kickstart:app', function() {
 
   it('creates devtools page', function() {
     assert.file([
-      'app/html/devtools.html',
-      'app/scripts/devtools.js',
+      'app/pages/devtools.html',
+      'app/devtools.js',
       'app/styles/devtools.less'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"minimum_chrome_version":\s"10\.0"/],
-      ['app/manifest.json', /"devtools_page":\s"html\/devtools\.html"/]
+      ['app/manifest.json', /"devtools_page":\s"pages\/devtools\.html"/]
     ]);
   });
 
   it('creates newtab files', function() {
     assert.file([
-      'app/html/newtab.html',
-      'app/scripts/newtab.js',
+      'app/pages/newtab.html',
+      'app/newtab.js',
       'app/styles/newtab.less'
     ]);
     assert.fileContent([
-      ['app/manifest.json', /"newtab":\s"html\/newtab\.html"/]
+      ['app/manifest.json', /"newtab":\s"pages\/newtab\.html"/]
     ]);
   });
 
   it('creates all popup files', function() {
     assert.file([
-      'app/html/popup.html',
-      'app/scripts/popup.js',
+      'app/pages/popup.html',
+      'app/popup.js',
       'app/styles/popup.less'
     ]);
     assert.fileContent([
-      ['app/manifest.json', /"default_popup":\s"html\/popup\.html"/]
+      ['app/manifest.json', /"default_popup":\s"pages\/popup\.html"/]
     ]);
   });
 
   it('creates options', function() {
     assert.file([
-      'app/html/options.html',
-      'app/scripts/options.js',
+      'app/pages/options.html',
+      'app/options.js',
       'app/styles/options.less'
     ]);
     assert.fileContent([
-      ['app/manifest.json', /"options_page":\s"html\/options\.html"/]
+      ['app/manifest.json', /"options_page":\s"pages\/options\.html"/]
     ]);
   });
 
   it('creates contentscripts', function() {
     assert.file([
-      'app/scripts/content.js',
-      'app/styles/content.less'
+      'app/contentscript.js',
+      'app/styles/contentscript.less'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"content_scripts":\s\[/]
@@ -173,7 +179,7 @@ describe('chrome-extension-kickstart:app', function() {
 
   it('creates a background page', function() {
     assert.file([
-      'app/scripts/background.js'
+      'app/background.js'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"background":\s\{/]

@@ -10,5 +10,9 @@
   "appDescription": {
     "message": "<%= manifest.description %>",
     "description": "The description of the application"
-  }
+  }<% if (manifest.action) { %>,
+  "browserActionTitle": {
+    "message": "<%= manifest.name %>",
+    "description": "The description of the application"
+  }<% } %>
 }

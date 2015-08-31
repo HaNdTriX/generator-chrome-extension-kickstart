@@ -1,27 +1,16 @@
-var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var watch = require('gulp-watch');
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import imagemin from 'gulp-imagemin';
+import livereload from 'gulp-livereload';
+import yargs from 'yargs';
 
-/***********************************************************
- * Configue
- ***********************************************************/
-var src = 'app/images/**/*';
-var dest = 'dist/images';
+let argv = yargs.argv;
+let production = !!argv.production;
+let watch = !!argv.watch;
 
-/***********************************************************
- * Build
- ***********************************************************/
-gulp.task('images', function() {
-  return gulp.src(src)
-    .pipe(imagemin())
-    .pipe(gulp.dest(dest));
-});
-
-/***********************************************************
- * Watch
- ***********************************************************/
-gulp.task('images:dev', function() {
-  return gulp.src(src)
-    .pipe(watch(src))
-    .pipe(gulp.dest(dest));
+gulp.task('images', () => {
+   return gulp.src('app/images/**/*')
+    .pipe(gulpif(production, imagemin()))
+    .pipe(gulp.dest('dist/images'))
+    .pipe(gulpif(watch, livereload()));
 });

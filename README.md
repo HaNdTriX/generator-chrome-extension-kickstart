@@ -1,7 +1,7 @@
 # generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart)
 
 Chrome Extension generator that creates everything you need to get started with extension development. 
-This generator uses [gulp.js](http://gulpjs.com/) and [browserify](http://browserify.org/).
+This generator uses [gulp.js](http://gulpjs.com/) and [webpack](http://webpack.github.io/docs/).
 
 
 ## Warning
@@ -82,43 +82,19 @@ So use it at your own risk!
 
 To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as an unpacked extension.
 
-
-## Gulp tasks
-
-To modify your tasks check out the `tasks` directory of your generated extension.
-
-### Watch
-
-Use for development.
-Watches all files in the app directory and starts a fast build if a file was modified.
-It use [watchify](https://www.npmjs.com/package/watchify), chromereload (livereload) and [sourcemaps](https://github.com/ryanseddon/source-map/wiki/Source-maps:-languages,-tools-and-other-info).
-
-	$ npm run watch
-
-To use chromereload just load and execute the generated `chromereload.js`:
-
-	// background.js
-	require('./lib/chromereload')();
+## Tasks
 
 ### Build
 
-Use for production.
+  $ gulp
 
-	$ npm run build
+| Option         | Description                                                                                                                                       |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--watch`      | Starts a livereload server and watches all assets. To reload the extension on change include `chromereload.js` or `livereload.js` in your bundle. |
+| `--production` | Minifies all assets                                                                                                                               |
+| `--verbose`    | Log additional data to the console.            
 
-
-### Release
-
-Increments the manifest version, builds the extension and packs it into a `.zip` file.
-
-Use:
-
-	$ npm run release
-
-
-## Todo
-
-* Add tests
+for more tasks please check out the tasks directory.
 
 ## Contribute
 
