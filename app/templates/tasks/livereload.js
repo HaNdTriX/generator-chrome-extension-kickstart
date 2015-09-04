@@ -10,7 +10,7 @@ let verbose = !!argv.verbose;
 
 gulp.task('livereload', (cb) => {
 
-  // This task runs only if the 
+  // This task runs only if the
   // watch argument is present!
   if (!watch) return cb();
 
@@ -21,9 +21,10 @@ gulp.task('livereload', (cb) => {
   });
   gutil.log('Starting', gutil.colors.cyan('\'livereload-server\''));
 
-  // Hint: Scripts are being watched by webpack! 
+  // Hint: Scripts are being watched by webpack!
   //       For more info checkout ./webpack.js
 
+  gulp.watch('app/manifest.json', ['manifest']);
   gulp.watch('app/styles/**/*.css', ['styles:css']);
   gulp.watch('app/styles/**/*.less', ['styles:less']);
   gulp.watch('app/styles/**/*.scss', ['styles:sass']);
