@@ -389,6 +389,10 @@ module.exports = yeoman.generators.Base.extend({
       // add options page field.
       if (this.manifest.options) {
         manifest.options_page = '"pages/options.html"';
+        manifest.options_ui = buildJSONPart({
+          "page": "pages/options.html",
+          "chrome_style": true
+        });
       }
 
       // add devtool page field.
