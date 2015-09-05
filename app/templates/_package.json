@@ -1,8 +1,8 @@
 {
   "name": "<%= _.slugify(appname) %>",
+  "private": true,
   "version": "0.0.0",
   "description": "<%= _.slugify(manifest.description) %>",
-  "author": "Henrik Wenz <handtrix@gmail.com>",
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-core": "^5.8.22",
