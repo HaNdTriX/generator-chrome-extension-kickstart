@@ -163,7 +163,8 @@ describe('chrome-extension-kickstart:app', function() {
       'app/styles/options.less'
     ]);
     assert.fileContent([
-      ['app/manifest.json', /"options_page":\s"pages\/options\.html"/]
+      ['app/manifest.json', /"options_page":\s"pages\/options\.html"/],
+      ['app/manifest.json', /"options_ui": {\s+"page": "pages\/options.html",\s+"chrome_style": true\s+}/]
     ]);
   });
 
