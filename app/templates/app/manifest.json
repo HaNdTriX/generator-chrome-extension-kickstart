@@ -5,10 +5,6 @@
   "version": "0.0.0",
   "manifest_version": 2,
   "default_locale": "en",
-  "browser_action": {
-    "default_title": "__MSG_browserActionTitle__",
-    "default_popup": "pages/popup.html"
-  },
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png",
