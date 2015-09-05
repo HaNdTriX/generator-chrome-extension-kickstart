@@ -460,6 +460,7 @@ module.exports = yeoman.generators.Base.extend({
         permissions.push('https://*/*');
       }
 
+      // add permissions
       if (permissions.length > 0) {
         manifest.permissions = buildJSONPart(permissions);
       }
