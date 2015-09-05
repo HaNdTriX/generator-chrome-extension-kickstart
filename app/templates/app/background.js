@@ -8,9 +8,3 @@ chrome.runtime.onInstalled.addListener(function (details) {
 });
 
 console.log('\'Allo \'Allo! Event Page');
-
-
-test = 1;
-
-super = 'lala';
-var super2 = "lala";
