@@ -23,7 +23,7 @@ gulp.task('styles:css', function() {
 gulp.task('styles:less', function() {
   return gulp.src('app/styles/*.less')
     .pipe(gulpif(!production, sourcemaps.init()))
-    .pipe(less().on('error', function(error) {
+    .pipe(less({ paths: ['./app']}).on('error', function(error) {
       gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
       this.emit('end');
     }))
@@ -36,7 +36,7 @@ gulp.task('styles:less', function() {
 gulp.task('styles:sass', function() {
   return gulp.src('app/styles/*.scss')
     .pipe(gulpif(!production, sourcemaps.init()))
-    .pipe(sass().on('error', function(error) {
+    .pipe(sass({ includePaths: ['./app']}).on('error', function(error) {
       gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
       this.emit('end');
     }))
