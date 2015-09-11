@@ -7,7 +7,7 @@ let argv = yargs.argv;
 let watch = !!argv.watch;
 
 gulp.task('locales', () => {
-  gulp.src('app/_locales/**/*')
+  gulp.src('app/_locales/**/*.json')
     .pipe(gulp.dest('dist/_locales'))
     .pipe(gulpif(watch, livereload()));
 });
