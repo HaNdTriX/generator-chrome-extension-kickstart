@@ -125,7 +125,7 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates devtools page', function() {
     assert.file([
       'app/pages/devtools.html',
-      'app/devtools.js',
+      'app/scripts/devtools.js',
       'app/styles/devtools.less'
     ]);
     assert.fileContent([
@@ -137,7 +137,7 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates newtab files', function() {
     assert.file([
       'app/pages/newtab.html',
-      'app/newtab.js',
+      'app/scripts/newtab.js',
       'app/styles/newtab.less'
     ]);
     assert.fileContent([
@@ -148,7 +148,7 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates all popup files', function() {
     assert.file([
       'app/pages/popup.html',
-      'app/popup.js',
+      'app/scripts/popup.js',
       'app/styles/popup.less'
     ]);
     assert.fileContent([
@@ -159,7 +159,7 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates options', function() {
     assert.file([
       'app/pages/options.html',
-      'app/options.js',
+      'app/scripts/options.js',
       'app/styles/options.less'
     ]);
     assert.fileContent([
@@ -170,7 +170,7 @@ describe('chrome-extension-kickstart:app', function() {
 
   it('creates contentscripts', function() {
     assert.file([
-      'app/contentscript.js',
+      'app/scripts/contentscript.js',
       'app/styles/contentscript.less'
     ]);
     assert.fileContent([
@@ -180,7 +180,7 @@ describe('chrome-extension-kickstart:app', function() {
 
   it('creates a background page', function() {
     assert.file([
-      'app/background.js'
+      'app/scripts/background.js'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"background":\s\{/]

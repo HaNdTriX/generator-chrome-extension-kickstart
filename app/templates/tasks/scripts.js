@@ -30,11 +30,11 @@ function createWebpackConfig() {
     devtool: production ? null : 'inline-source-map',
     watch: watch,
     context: appDir,
-    entry: globToEntryMap('*.js', {
+    entry: globToEntryMap('scripts/*.js', {
       cwd: appDir
     }),
     output: {
-      path: 'dist',
+      path: 'dist/scripts',
       filename: '[name].js'
     },
     plugins: [
