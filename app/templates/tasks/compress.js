@@ -6,7 +6,7 @@ gulp.task('compress', () => {
   let name = packageDetails.name;
   let version = packageDetails.version;
   let filename = `${name}-${version}.zip`;
-  gulp.src('dist/*')
+  gulp.src('dist/**/*')
     .pipe(zip(filename))
     .pipe(gulp.dest('./packages'));
 });
