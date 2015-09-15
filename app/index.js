@@ -496,7 +496,6 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       this.copy('app/scripts/' + backgroundjs, 'app/scripts/background.js');
-      this.copy('app/scripts/lib/chromereload.js', 'app/scripts/lib/chromereload.js');
       this.copy('app/scripts/lib/livereload.js', 'app/scripts/lib/livereload.js');
     },
 
