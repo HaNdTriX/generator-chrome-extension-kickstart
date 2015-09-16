@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import gutil from 'gulp-util';
+import { colors, log } from 'gulp-util';
 import zip from 'gulp-zip';
 import packageDetails from '../package.json';
 
@@ -11,8 +11,8 @@ gulp.task('compress', () => {
     .pipe(zip(filename))
     .pipe(gulp.dest('./packages'))
     .on('end', () => {
-      let distStyled = gutil.colors.gray(`./dist`);
-      let filenameStyled = gutil.colors.gray(`./packages/${filename}`);
-      gutil.log(`Compressed ${distStyled} to ${filenameStyled}`);
+      let distStyled = colors.gray('./dist');
+      let filenameStyled = colors.gray(`./packages/${filename}`);
+      log(`Compressed ${distStyled} to ${filenameStyled}`);
     });
 });
