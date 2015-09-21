@@ -1,8 +1,7 @@
-# generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart)
+# generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart) [![npm package](https://badge.fury.io/js/generator-chrome-extension-kickstart.svg)](https://www.npmjs.com/package/generator-chrome-extension-kickstart)
 
 Chrome Extension generator that creates everything you need to get started with extension development. 
 This generator uses [gulp.js](http://gulpjs.com/) and [webpack](http://webpack.github.io/docs/).
-
 
 ## Warning
 
