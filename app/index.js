@@ -81,10 +81,6 @@ module.exports = yeoman.generators.Base.extend({
       name: 'permissions',
       message: 'Would you like to use permissions?',
       choices: [{
-        value: 'alarms',
-        name: 'Alarms',
-        checked: false
-      }, {
         value: 'bookmarks',
         name: 'Bookmarks',
         checked: false
@@ -125,36 +121,8 @@ module.exports = yeoman.generators.Base.extend({
         name: 'DeclarativeContent',
         checked: false
       }, {
-        value: 'desktopCapture',
-        name: 'DesktopCapture',
-        checked: false
-      }, {
-        value: 'downloads',
-        name: 'Downloads',
-        checked: false
-      }, {
-        value: 'enterprise.platformKeys',
-        name: 'Enterprise.platformKeys',
-        checked: false
-      }, {
-        value: 'fontSettings',
-        name: 'FontSettings',
-        checked: false
-      }, {
-        value: 'gcm ',
-        name: 'gcm ',
-        checked: false
-      }, {
         value: 'history',
         name: 'History',
-        checked: false
-      }, {
-        value: 'identity',
-        name: 'Identity',
-        checked: false
-      }, {
-        value: 'idle',
-        name: 'Idle',
         checked: false
       }, {
         value: 'input',
@@ -175,30 +143,6 @@ module.exports = yeoman.generators.Base.extend({
       }, {
         value: 'proxy',
         name: 'Proxy',
-        checked: false
-      }, {
-        value: 'pushMessaging',
-        name: 'PushMessaging',
-        checked: false
-      }, {
-        value: 'system.cpu',
-        name: 'system.cpu',
-        checked: false
-      }, {
-        value: 'system.memory',
-        name: 'system.memory',
-        checked: false
-      }, {
-        value: 'system.storage',
-        name: 'system.storage',
-        checked: false
-      }, {
-        value: 'tts',
-        name: 'TextToSpeech',
-        checked: false
-      }, {
-        value: 'ttsEngine',
-        name: 'TextToSpeechEngine',
         checked: false
       }, {
         value: 'tabs',
@@ -248,7 +192,6 @@ module.exports = yeoman.generators.Base.extend({
       this.manifest.contentscript = isChecked(answers.uifeatures, 'contentscript');
 
       // Permissions
-      this.manifest.permissions.alarms = isChecked(answers.permissions, 'alarms');
       this.manifest.permissions.bookmarks = isChecked(answers.permissions, 'bookmarks');
       this.manifest.permissions.browsingData = isChecked(answers.permissions, 'browsingData');
       this.manifest.permissions.clipboardRead = isChecked(answers.permissions, 'clipboardRead');
@@ -259,28 +202,15 @@ module.exports = yeoman.generators.Base.extend({
       this.manifest.permissions.cookies = isChecked(answers.permissions, 'cookies');
       this.manifest.permissions.debugger = isChecked(answers.permissions, 'debugger');
       this.manifest.permissions.declarativeContent = isChecked(answers.permissions, 'declarativeContent');
-      this.manifest.permissions.desktopCapture = isChecked(answers.permissions, 'desktopCapture');
-      this.manifest.permissions.downloads = isChecked(answers.permissions, 'downloads');
-      this.manifest.permissions['enterprise.platformKeys'] = isChecked(answers.permissions, 'enterprise.platformKeys');
-      this.manifest.permissions.fontSettings = isChecked(answers.permissions, 'fontSettings');
-      this.manifest.permissions.gcm = isChecked(answers.permissions, 'gcm');
       this.manifest.permissions.history = isChecked(answers.permissions, 'history');
-      this.manifest.permissions.identity = isChecked(answers.permissions, 'identity');
-      this.manifest.permissions.idle = isChecked(answers.permissions, 'idle');
       this.manifest.permissions.input = isChecked(answers.permissions, 'input');
       this.manifest.permissions.management = isChecked(answers.permissions, 'management');
       this.manifest.permissions.notifications = isChecked(answers.permissions, 'notifications');
       this.manifest.permissions.pageCapture = isChecked(answers.permissions, 'pageCapture');
       this.manifest.permissions.proxy = isChecked(answers.permissions, 'proxy');
-      this.manifest.permissions.pushMessaging = isChecked(answers.permissions, 'pushMessaging');
-      this.manifest.permissions['system.cpu'] = isChecked(answers.permissions, 'system.cpu');
-      this.manifest.permissions['system.memory'] = isChecked(answers.permissions, 'system.memory');
-      this.manifest.permissions['system.storage'] = isChecked(answers.permissions, 'system.storage');
       this.manifest.permissions.tabCapture = isChecked(answers.permissions, 'tabCapture');
       this.manifest.permissions.tabs = isChecked(answers.permissions, 'tabs');
       this.manifest.permissions.topSites = isChecked(answers.permissions, 'topSites');
-      this.manifest.permissions.tts = isChecked(answers.permissions, 'tts');
-      this.manifest.permissions.ttsEngine = isChecked(answers.permissions, 'ttsEngine');
       this.manifest.permissions.webNavigation = isChecked(answers.permissions, 'webNavigation');
       this.manifest.permissions.webRequest = isChecked(answers.permissions, 'webRequest');
       this.manifest.permissions.webRequestBlocking = isChecked(answers.permissions, 'webRequestBlocking');
