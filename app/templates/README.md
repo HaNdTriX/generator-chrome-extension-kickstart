@@ -14,7 +14,7 @@ Run `$ gulp --watch` and load the `dist`-directory into chrome.
 
 There are two kinds of entryfiles that create bundles.
 
-1. All js-files in the root of the `./app` directory
+1. All js-files in the root of the `./app/scripts` directory
 2. All css-,scss- and less-files in the root of the `./app/styles` directory
 
 ## Tasks
