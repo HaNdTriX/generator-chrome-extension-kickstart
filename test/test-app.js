@@ -47,7 +47,8 @@ describe('chrome-extension-kickstart:app', function() {
           'webNavigation',
           'webRequest',
           'webRequestBlocking'
-        ]
+        ],
+        artworks: true
       })
       .on('end', done);
   });

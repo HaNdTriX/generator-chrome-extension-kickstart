@@ -168,7 +168,12 @@ module.exports = yeoman.generators.Base.extend({
         value: 'webRequestBlocking',
         name: 'WebRequestBlocking',
         checked: false
-      }]
+      }],
+    }, {
+      type: 'confirm',
+      name: 'artworks',
+      defaults: false,
+      message: 'Would you like to install promo images for the Chrome Web Store (artworks)?'
     }];
 
     this.prompt(prompts, function(answers) {
@@ -234,6 +239,8 @@ module.exports = yeoman.generators.Base.extend({
           break;
       }
 
+      this.artworks = answers.artworks;
+
       cb();
     }.bind(this));
   },
@@ -280,6 +287,9 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     artworks: function() {
+      if(!this.artworks){
+        return;
+      }
       this.mkdir('artworks');
       this.copy('artworks/Chrome-Webstore-Icon_128x128.png', 'artworks/Chrome-Webstore-Icon_128x128.png');
       this.copy('artworks/Promo-Image-Large_920x680.png', 'artworks/Promo-Image-Large_920x680.png');
