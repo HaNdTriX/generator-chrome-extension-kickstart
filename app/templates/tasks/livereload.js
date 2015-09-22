@@ -19,11 +19,11 @@ gulp.task('livereload', (cb) => {
     reloadPage: 'Extension',
     quiet: !verbose
   });
+
   gutil.log('Starting', gutil.colors.cyan('\'livereload-server\''));
 
-  // Hint: Scripts are being watched by webpack!
-  //       For more info checkout ./webpack.js
-
+  // The watching for javascript files is done by webpack
+  // Check out ./tasks/scripts.js for further info.
   gulp.watch('app/manifest.json', ['manifest']);
   gulp.watch('app/styles/**/*.css', ['styles:css']);
   gulp.watch('app/styles/**/*.less', ['styles:less']);

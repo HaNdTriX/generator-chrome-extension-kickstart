@@ -24,14 +24,14 @@ gulp.task('scripts', (cb) => {
         new webpack.optimize.UglifyJsPlugin()
       ] : []),
       module: {
-        loaders: [{
-          test: /\.js$/,
-          loaders: ['babel'],
-          exclude: /node_modules/
-        }],
         preLoaders: [{
           test: /\.js$/,
           loader: 'eslint-loader',
+          exclude: /node_modules/
+        }],
+        loaders: [{
+          test: /\.js$/,
+          loaders: ['babel'],
           exclude: /node_modules/
         }]
       },

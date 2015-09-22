@@ -9,7 +9,7 @@ let production = !!argv.production;
 let watch = !!argv.watch;
 
 gulp.task('images', () => {
-   return gulp.src('app/images/**/*')
+  return gulp.src('app/images/**/*')
     .pipe(gulpif(production, imagemin()))
     .pipe(gulp.dest('dist/images'))
     .pipe(gulpif(watch, livereload()));

@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
 import gutil from 'gulp-util';
-import plumber from 'gulp-plumber';
 import sourcemaps from 'gulp-sourcemaps';
 import less from 'gulp-less';
 import sass from 'gulp-sass';

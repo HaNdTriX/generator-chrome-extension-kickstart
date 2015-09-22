@@ -1,4 +1,3 @@
-import gulp from 'gulp';
 import requireDir from 'require-dir';
 
 // Check out the tasks directory

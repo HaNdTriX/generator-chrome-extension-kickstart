@@ -7,7 +7,7 @@ let argv = yargs.argv;
 let watch = !!argv.watch;
 
 gulp.task('manifest', () => {
-  gulp.src('app/manifest.json')
+  return gulp.src('app/manifest.json')
     .pipe(gulp.dest('dist'))
     .pipe(gulpif(watch, livereload()));
 });
