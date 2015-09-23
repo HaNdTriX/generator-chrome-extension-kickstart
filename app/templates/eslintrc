@@ -3,7 +3,8 @@
     "browser": true
   },
   "globals": {
-    "chrome": true
+    "chrome": true,
+    "crypto": true
   },
   "parser": "babel-eslint",
   "rules": {
