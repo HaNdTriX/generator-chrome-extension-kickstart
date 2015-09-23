@@ -39,11 +39,11 @@ To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as 
 
     $ gulp
 
-| Option         | Description                                                                                                                   |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------|
-| `--watch`      | Starts a livereload server and watches all assets. To reload the extension on change include  `livereload.js` in your bundle. |
-| `--production` | Minifies all assets                                                                                                           |
-| `--verbose`    | Log additional data to the console.            
+| Option         | Description                                                                                                                       |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include  `livereload.js` in your bundle. |
+| `--production` | Minifies all assets                                                                                                               |
+| `--verbose`    | Log additional data to the console.                                                                                               |          
 
 for more tasks please check out the tasks directory.
 
