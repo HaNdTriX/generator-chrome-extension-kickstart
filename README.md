@@ -8,11 +8,6 @@ This generator uses:
 * [webpack](http://webpack.github.io/docs/)
 * [Babel](https://babeljs.io/)
 
-## Warning
-
-This generator is still in active development and things will change!
-So use it at your own risk!
-
 ## Install
 
 	$ npm install -g yo generator-chrome-extension-kickstart
