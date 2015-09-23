@@ -24,11 +24,11 @@ There are two kinds of entryfiles that create bundles.
 	$ gulp
 
 
-| Option         | Description                                                                                                                                       |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--watch`      | Starts a livereload server and watches all assets. To reload the extension on change include `chromereload.js` or `livereload.js` in your bundle. |
-| `--production` | Minifies all assets                                                                                                                               |
-| `--verbose`    | Log additional data to the console.            
+| Option         | Description                                                                                                                                           |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include `livereload.js` in your bundle.                      |
+| `--production` | Minifies all assets                                                                                                                                   |
+| `--verbose`    | Log additional data to the console.                                                                                                                   |
 
 
 ### compress
