@@ -1,7 +1,12 @@
 # generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart) [![npm package](https://badge.fury.io/js/generator-chrome-extension-kickstart.svg)](https://www.npmjs.com/package/generator-chrome-extension-kickstart)
 
 Chrome Extension generator that creates everything you need to get started with extension development. 
-This generator uses [gulp.js](http://gulpjs.com/) and [webpack](http://webpack.github.io/docs/).
+
+This generator uses:
+
+* [gulp.js](http://gulpjs.com/)
+* [webpack](http://webpack.github.io/docs/)
+* [Babel](https://babeljs.io/)
 
 ## Warning
 
@@ -34,10 +39,10 @@ To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as 
 
     $ gulp
 
-| Option         | Description                                                                                                                                       |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--watch`      | Starts a livereload server and watches all assets. To reload the extension on change include `chromereload.js` or `livereload.js` in your bundle. |
-| `--production` | Minifies all assets                                                                                                                               |
+| Option         | Description                                                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `--watch`      | Starts a livereload server and watches all assets. To reload the extension on change include  `livereload.js` in your bundle. |
+| `--production` | Minifies all assets                                                                                                           |
 | `--verbose`    | Log additional data to the console.            
 
 for more tasks please check out the tasks directory.
