@@ -48,7 +48,7 @@ describe('chrome-extension-kickstart:app', function() {
           'webRequest',
           'webRequestBlocking'
         ],
-        artworks: true
+        promo: true
       })
       .on('end', done);
   });
@@ -82,14 +82,14 @@ describe('chrome-extension-kickstart:app', function() {
     ]);
   });
 
-  it('creates artworks', function() {
+  it('creates promo', function() {
     assert.file([
-      'artworks/Chrome-Webstore-Icon_128x128.png',
-      'artworks/Promo-Image-Large_920x680.png',
-      'artworks/Promo-Image-Marquee_1400x560.png',
-      'artworks/Promo-Image-Small_440x280.png',
-      'artworks/Screenshot_1280x800.png',
-      'artworks/Screenshot_640x400.png',
+      'promo/Chrome-Webstore-Icon_128x128.png',
+      'promo/Promo-Image-Large_920x680.png',
+      'promo/Promo-Image-Marquee_1400x560.png',
+      'promo/Promo-Image-Small_440x280.png',
+      'promo/Screenshot_1280x800.png',
+      'promo/Screenshot_640x400.png',
     ]);
   });
 

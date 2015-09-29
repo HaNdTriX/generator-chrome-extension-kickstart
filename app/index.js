@@ -239,7 +239,7 @@ module.exports = yeoman.generators.Base.extend({
           break;
       }
 
-      this.artworks = answers.artworks;
+      this.promo = answers.promo;
 
       cb();
     }.bind(this));
@@ -286,17 +286,17 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('eslintrc', '.eslintrc');
     },
 
-    artworks: function() {
-      if(!this.artworks){
+    promo: function() {
+      if(!this.promo){
         return;
       }
-      this.mkdir('artworks');
-      this.copy('artworks/Chrome-Webstore-Icon_128x128.png', 'artworks/Chrome-Webstore-Icon_128x128.png');
-      this.copy('artworks/Promo-Image-Large_920x680.png', 'artworks/Promo-Image-Large_920x680.png');
-      this.copy('artworks/Promo-Image-Marquee_1400x560.png', 'artworks/Promo-Image-Marquee_1400x560.png');
-      this.copy('artworks/Promo-Image-Small_440x280.png', 'artworks/Promo-Image-Small_440x280.png');
-      this.copy('artworks/Screenshot_1280x800.png', 'artworks/Screenshot_1280x800.png');
-      this.copy('artworks/Screenshot_640x400.png', 'artworks/Screenshot_640x400.png');
+      this.mkdir('promo');
+      this.copy('promo/Chrome-Webstore-Icon_128x128.png', 'promo/Chrome-Webstore-Icon_128x128.png');
+      this.copy('promo/Promo-Image-Large_920x680.png', 'promo/Promo-Image-Large_920x680.png');
+      this.copy('promo/Promo-Image-Marquee_1400x560.png', 'promo/Promo-Image-Marquee_1400x560.png');
+      this.copy('promo/Promo-Image-Small_440x280.png', 'promo/Promo-Image-Small_440x280.png');
+      this.copy('promo/Screenshot_1280x800.png', 'promo/Screenshot_1280x800.png');
+      this.copy('promo/Screenshot_640x400.png', 'promo/Screenshot_640x400.png');
     },
 
     editorConfig: function() {
