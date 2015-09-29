@@ -171,9 +171,9 @@ module.exports = yeoman.generators.Base.extend({
       }],
     }, {
       type: 'confirm',
-      name: 'artworks',
-      defaults: false,
-      message: 'Would you like to install promo images for the Chrome Web Store (artworks)?'
+      name: 'promo',
+      default: false,
+      message: 'Would you like to install promo images for the Chrome Web Store?'
     }];
 
     this.prompt(prompts, function(answers) {
@@ -255,7 +255,7 @@ module.exports = yeoman.generators.Base.extend({
       this.template('gulpfile.babel.js', 'gulpfile.babel.js');
 
       this.copy('tasks/clean.js', 'tasks/clean.js');
-      this.copy('tasks/compress.js', 'tasks/compress.js');
+      this.copy('tasks/pack.js', 'tasks/pack.js');
       this.copy('tasks/default.js', 'tasks/default.js');
       this.copy('tasks/fonts.js', 'tasks/fonts.js');
       this.copy('tasks/images.js', 'tasks/images.js');

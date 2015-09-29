@@ -68,7 +68,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'gulpfile.babel.js',
       'tasks/clean.js',
-      'tasks/compress.js',
+      'tasks/pack.js',
       'tasks/default.js',
       'tasks/fonts.js',
       'tasks/images.js',

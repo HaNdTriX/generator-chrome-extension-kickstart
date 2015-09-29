@@ -31,11 +31,11 @@ There are two kinds of entryfiles that create bundles.
 | `--verbose`    | Log additional data to the console.                                                                                                                   |
 
 
-### compress
+### pack
 
 Zips your `dist` directory and saves it in the `packages` directory.
 
-    $ gulp compress
+    $ gulp pack
 
 ### Version
 
