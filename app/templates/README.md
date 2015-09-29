@@ -29,13 +29,15 @@ There are two kinds of entryfiles that create bundles.
 | `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include `livereload.js` in your bundle.                      |
 | `--production` | Minifies all assets                                                                                                                                   |
 | `--verbose`    | Log additional data to the console.                                                                                                                   |
+| `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome                                                                 |
+| `--sourcemaps` | Force the creation of sourcemaps. Default: !production                                                                                                |
 
 
 ### pack
 
 Zips your `dist` directory and saves it in the `packages` directory.
 
-    $ gulp pack
+    $ gulp pack --vendor=firefox
 
 ### Version
 

@@ -4,23 +4,20 @@ import named from 'vinyl-named';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
 import livereload from 'gulp-livereload';
-import yargs from 'yargs';
-
-let argv = yargs.argv;
-let production = !!argv.production;
-let watch = !!argv.watch;
+import args from './lib/args';
 
 gulp.task('scripts', (cb) => {
   return gulp.src('app/scripts/*.js')
     .pipe(named())
     .pipe(gulpWebpack({
-      devtool: production ? null : 'source-map',
-      watch: watch,
+      devtool: args.sourcemaps ? 'source-map': null,
+      watch: args.watch,
       plugins: [
         new webpack.DefinePlugin({
-          'ENV': JSON.stringify(production ? 'production' : 'development')
+          '__ENV__': JSON.stringify(args.production ? 'production' : 'development'),
+          '__VENDOR__': JSON.stringify(args.vendor)
         }),
-      ].concat(production ? [
+      ].concat(args.production ? [
         new webpack.optimize.UglifyJsPlugin()
       ] : []),
       module: {
@@ -39,6 +36,7 @@ gulp.task('scripts', (cb) => {
         configFile: '.eslintrc'
       }
     }))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(gulpif(watch, livereload()));
+    .pipe(gulp.dest(`dist/${args.vendor}/scripts`))
+    .pipe(gulpif(args.watch, livereload()));
 });
+

@@ -67,14 +67,17 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates tasks', function() {
     assert.file([
       'gulpfile.babel.js',
+      'tasks/lib/applyBrowserPrefixesFor.js',
+      'tasks/lib/args.js',
+      'tasks/build.js',
       'tasks/clean.js',
-      'tasks/pack.js',
       'tasks/default.js',
       'tasks/fonts.js',
       'tasks/images.js',
       'tasks/livereload.js',
       'tasks/locales.js',
       'tasks/manifest.js',
+      'tasks/pack.js',
       'tasks/pages.js',
       'tasks/scripts.js',
       'tasks/styles.js',

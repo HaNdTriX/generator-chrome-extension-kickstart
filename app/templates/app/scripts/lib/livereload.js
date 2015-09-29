@@ -1,6 +1,6 @@
 // Use for page reloads
 
-if (ENV === 'development') {
+if (__ENV__ === 'development') {
   (function() {
 
     let LIVERELOAD_HOST = 'localhost:';

@@ -253,19 +253,22 @@ module.exports = yeoman.generators.Base.extend({
 
     gulpfile: function() {
       this.template('gulpfile.babel.js', 'gulpfile.babel.js');
-
-      this.copy('tasks/clean.js', 'tasks/clean.js');
-      this.copy('tasks/pack.js', 'tasks/pack.js');
-      this.copy('tasks/default.js', 'tasks/default.js');
-      this.copy('tasks/fonts.js', 'tasks/fonts.js');
-      this.copy('tasks/images.js', 'tasks/images.js');
-      this.copy('tasks/livereload.js', 'tasks/livereload.js');
-      this.copy('tasks/locales.js', 'tasks/locales.js');
-      this.copy('tasks/manifest.js', 'tasks/manifest.js');
-      this.copy('tasks/pages.js', 'tasks/pages.js');
-      this.copy('tasks/scripts.js', 'tasks/scripts.js');
-      this.copy('tasks/styles.js', 'tasks/styles.js');
-      this.copy('tasks/version.js', 'tasks/version.js');
+      this.copy('tasks/lib/applyBrowserPrefixesFor.js',
+                'tasks/lib/applyBrowserPrefixesFor.js');
+      this.copy('tasks/lib/args.js',    'tasks/lib/args.js');
+      this.copy('tasks/build.js',       'tasks/build.js');
+      this.copy('tasks/clean.js',       'tasks/clean.js');
+      this.copy('tasks/default.js',     'tasks/default.js');
+      this.copy('tasks/fonts.js',       'tasks/fonts.js');
+      this.copy('tasks/images.js',      'tasks/images.js');
+      this.copy('tasks/livereload.js',  'tasks/livereload.js');
+      this.copy('tasks/locales.js',     'tasks/locales.js');
+      this.copy('tasks/manifest.js',    'tasks/manifest.js');
+      this.copy('tasks/pack.js',        'tasks/pack.js');
+      this.copy('tasks/pages.js',       'tasks/pages.js');
+      this.copy('tasks/scripts.js',     'tasks/scripts.js');
+      this.copy('tasks/styles.js',      'tasks/styles.js');
+      this.copy('tasks/version.js',     'tasks/version.js');
 
     },
 
