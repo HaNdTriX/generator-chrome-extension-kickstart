@@ -1,12 +1,27 @@
 # generator-chrome-extension-kickstart [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart) [![npm package](https://badge.fury.io/js/generator-chrome-extension-kickstart.svg)](https://www.npmjs.com/package/generator-chrome-extension-kickstart)
 
-Chrome Extension generator that creates everything you need to get started with extension development. 
+Advanced WebExtension generator that creates everything you need to get started with extension development. 
 
 This generator uses:
 
 * [gulp.js](http://gulpjs.com/)
 * [webpack](http://webpack.github.io/docs/)
-* [Babel](https://babeljs.io/)
+* [Babel.js](https://babeljs.io/)
+
+## Features
+
+* ES2015
+* Modules (ES2015, CommonJS, AMD)
+* Multi browser support ([chrome](https://developer.chrome.com/extensions), [firefox](https://wiki.mozilla.org/WebExtensions), [opera](https://dev.opera.com/extensions/))
+* Vendor prefixed manifest keys
+* Sourcemaps
+* Linting
+* CSS, Sass, Less
+* Environment variables
+* Image optimization
+* Livereload
+* Packaging
+* Version management
 
 ## Install
 
@@ -24,23 +39,9 @@ This generator uses:
   Skips the automatic execution of `npm` after
   scaffolding has finished.
   
-## Test Chrome Extension
+## Documentation
 
-To test, go to: `chrome://extensions`, enable Developer mode and load `dist` as an unpacked extension.
-
-## Tasks
-
-### Build
-
-    $ gulp
-
-| Option         | Description                                                                                                                       |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include  `livereload.js` in your bundle. |
-| `--production` | Minifies all assets                                                                                                               |
-| `--verbose`    | Log additional data to the console.                                                                                               |          
-
-for more tasks please check out the tasks directory.
+Check out the [documentation](DOCUMENTATION.md)
 
 ## Contribute
 
