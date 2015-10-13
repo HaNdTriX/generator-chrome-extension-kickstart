@@ -3,6 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "description": "<%= _.slugify(manifest.description) %>",
+  "scripts": {
+    "build:chrome": "gulp --production --vendor=chrome && gulp pack --vendor=chrome",
+    "build:firefox": "gulp --production --vendor=firefox && gulp pack --vendor=firefox",
+    "build:opera": "gulp --production --vendor=opera && gulp pack --vendor=opera",
+    "dev:chrome": "gulp --watch --vendor=chrome",
+    "dev:firefox": "gulp --watch --vendor=firefox",
+    "dev:opera": "gulp --watch --vendor=opera"
+  },
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-core": "^5.8.22",
