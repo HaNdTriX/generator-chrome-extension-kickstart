@@ -22,8 +22,8 @@ gulp.task('pack', () => {
     .pipe(zip(filename))
     .pipe(gulp.dest('./packages'))
     .on('end', () => {
-      let distStyled = colors.gray(`dist/${args.vendor}`);
-      let filenameStyled = colors.gray(`./packages/${filename}`);
+      let distStyled = colors.magenta(`dist/${args.vendor}`);
+      let filenameStyled = colors.magenta(`./packages/${filename}`);
       log(`Packed ${distStyled} to ${filenameStyled}`);
     });
 });
