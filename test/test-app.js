@@ -1,18 +1,16 @@
 'use strict';
 
 var path = require('path');
-var assert = require('yeoman-generator').assert;
-var helpers = require('yeoman-generator').test;
-var os = require('os');
+var assert = require('yeoman-assert');
+var helpers = require('yeoman-test');
 
 describe('chrome-extension-kickstart:app', function() {
   before(function(done) {
     helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({
         'skip-install': true
       })
-      .withPrompt({
+      .withPrompts({
         name: 'test-extension',
         shortName: 'test-ext',
         description: 'Lorem Ipsum',
@@ -58,6 +56,7 @@ describe('chrome-extension-kickstart:app', function() {
       'package.json',
       '.editorconfig',
       '.eslintrc',
+      '.babelrc',
       '.gitattributes',
       '.gitignore',
       'README.md'
