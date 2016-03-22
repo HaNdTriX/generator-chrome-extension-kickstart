@@ -528,7 +528,6 @@ module.exports = yeoman.generators.Base.extend({
     assets: function() {
       this.copy('app/images/icon-16.png', 'app/images/icon-16.png');
       this.copy('app/images/icon-128.png', 'app/images/icon-128.png');
-      this.copy('app/images/icon-large.svg', 'app/images/icon-large.svg');
       this.copy('app/fonts/gitkeep', 'app/fonts/.gitkeep');
     }
   },

@@ -7,8 +7,7 @@
   "default_locale": "en",
   "icons": {
     "16": "images/icon-16.png",
-    "128": "images/icon-128.png",
-    "scalable": "images/icon-large.svg"
+    "128": "images/icon-128.png"
   },
   "background": {
     "scripts": [
