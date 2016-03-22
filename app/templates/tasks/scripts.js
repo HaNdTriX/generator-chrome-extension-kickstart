@@ -3,11 +3,13 @@ import gulpif from 'gulp-if';
 import named from 'vinyl-named';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
+import plumber from 'gulp-plumber';
 import livereload from 'gulp-livereload';
 import args from './lib/args';
 
 gulp.task('scripts', (cb) => {
   return gulp.src('app/scripts/*.js')
+    .pipe(plumber())
     .pipe(named())
     .pipe(gulpWebpack({
       devtool: args.sourcemaps ? 'source-map': null,
@@ -28,8 +30,7 @@ gulp.task('scripts', (cb) => {
         }],
         loaders: [{
           test: /\.js$/,
-          loaders: ['babel'],
-          exclude: /node_modules/
+          loader: 'babel'
         }]
       },
       eslint: {
@@ -39,4 +40,3 @@ gulp.task('scripts', (cb) => {
     .pipe(gulp.dest(`dist/${args.vendor}/scripts`))
     .pipe(gulpif(args.watch, livereload()));
 });
-

@@ -5,6 +5,8 @@ var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var dasherize = require('dasherize');
+var mkdirp = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -248,36 +250,34 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
 
     app: function() {
-      this.mkdir('app');
+      mkdirp('app');
     },
 
     gulpfile: function() {
-      this.template('gulpfile.babel.js', 'gulpfile.babel.js');
-      this.copy('tasks/lib/applyBrowserPrefixesFor.js',
-                'tasks/lib/applyBrowserPrefixesFor.js');
-      this.copy('tasks/lib/args.js',    'tasks/lib/args.js');
-      this.copy('tasks/build.js',       'tasks/build.js');
-      this.copy('tasks/clean.js',       'tasks/clean.js');
-      this.copy('tasks/default.js',     'tasks/default.js');
-      this.copy('tasks/fonts.js',       'tasks/fonts.js');
-      this.copy('tasks/images.js',      'tasks/images.js');
-      this.copy('tasks/livereload.js',  'tasks/livereload.js');
-      this.copy('tasks/locales.js',     'tasks/locales.js');
-      this.copy('tasks/manifest.js',    'tasks/manifest.js');
-      this.copy('tasks/pack.js',        'tasks/pack.js');
-      this.copy('tasks/pages.js',       'tasks/pages.js');
-      this.copy('tasks/scripts.js',     'tasks/scripts.js');
-      this.copy('tasks/styles.js',      'tasks/styles.js');
-      this.copy('tasks/version.js',     'tasks/version.js');
-
+      this.copy('gulpfile.babel.js', 'gulpfile.babel.js');
+      this.directory('tasks', 'tasks');
     },
 
     packageJSON: function() {
-      this.template('_package.json', 'package.json');
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        {
+          name: dasherize(this.appname),
+          description: this.description
+        }
+      );
     },
 
     readme: function() {
-      this.template('README.md', 'README.md');
+      this.fs.copyTpl(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md'),
+        {
+          name: this.appname,
+          description: this.description
+        }
+      );
     },
 
     git: function() {
@@ -289,11 +289,15 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('eslintrc', '.eslintrc');
     },
 
+    babelrc: function() {
+      this.copy('babelrc', '.babelrc');
+    },
+
     promo: function() {
       if(!this.promo){
         return;
       }
-      this.mkdir('promo');
+      mkdirp('promo');
       this.copy('promo/Chrome-Webstore-Icon_128x128.png', 'promo/Chrome-Webstore-Icon_128x128.png');
       this.copy('promo/Promo-Image-Large_920x680.png', 'promo/Promo-Image-Large_920x680.png');
       this.copy('promo/Promo-Image-Marquee_1400x560.png', 'promo/Promo-Image-Marquee_1400x560.png');
@@ -414,7 +418,14 @@ module.exports = yeoman.generators.Base.extend({
 
       this.manifest.items = (items.length > 0) ? ',\n' + items.join(',\n') : '';
 
-      this.template('app/manifest.json', 'app/manifest.json');
+      this.fs.copyTpl(
+        this.templatePath('app/manifest.json'),
+        this.destinationPath('app/manifest.json'),
+        {
+          items: this.manifest.items,
+        }
+      );
+
     },
 
     actions: function() {
@@ -501,8 +512,20 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('app/styles/contentscript.less', 'app/styles/contentscript.less');
     },
 
+    locales: function() {
+      this.fs.copyTpl(
+        this.templatePath('app/_locales/en/messages.json'),
+        this.destinationPath('app/_locales/en/messages.json'),
+        {
+          name: this.manifest.name,
+          shortName: this.manifest.shortName,
+          description: this.manifest.description,
+          action: this.manifest.action
+        }
+      );
+    },
+
     assets: function() {
-      this.template('app/_locales/en/messages.json', 'app/_locales/en/messages.json');
       this.copy('app/images/icon-16.png', 'app/images/icon-16.png');
       this.copy('app/images/icon-128.png', 'app/images/icon-128.png');
       this.copy('app/images/icon-large.svg', 'app/images/icon-large.svg');

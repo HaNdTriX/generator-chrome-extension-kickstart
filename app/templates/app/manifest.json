@@ -14,5 +14,5 @@
     "scripts": [
       "scripts/background.js"
     ]
-  }<%= manifest.items %>
+  }<%- items %>
 }

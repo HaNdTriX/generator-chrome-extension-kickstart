@@ -1,6 +1,6 @@
-# <%= manifest.name %>
+# <%= name %>
 
-<%= manifest.description %>
+<%= description %>
 
 ## Installation
 
@@ -41,17 +41,17 @@ Zips your `dist` directory and saves it in the `packages` directory.
 
 ### Version
 
-Increments version number of `manifest.json` and `package.json`, 
+Increments version number of `manifest.json` and `package.json`,
 commits the change to git and adds a git tag.
 
 
     $ gulp patch      // => 0.0.X
- 
-or 
+
+or
 
     $ gulp feature    // => 0.X.0
 
-or 
+or
 
     $ gulp release    // => X.0.0
 
@@ -67,7 +67,7 @@ The build tool also defines a variable named `ENV` in your scripts. It will be s
 		console.log('We are in development mode!');
 	}
 
-	
+
 
 
 
