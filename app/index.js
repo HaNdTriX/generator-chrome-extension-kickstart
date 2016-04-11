@@ -5,7 +5,7 @@ var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
-var dasherize = require('dasherize');
+var slug = require('slug');
 var mkdirp = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
@@ -263,7 +263,7 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {
-          name: dasherize(this.appname),
+          name: slug(this.appname),
           description: this.description
         }
       );
