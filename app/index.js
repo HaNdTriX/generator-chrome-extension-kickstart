@@ -403,8 +403,7 @@ module.exports = yeoman.generators.Base.extend({
 
       // add generic match pattern field.
       if (this.manifest.permissions.tabs) {
-        permissions.push('http://*/*');
-        permissions.push('https://*/*');
+        permissions.push('<all_urls>');
       }
 
       // add permissions
