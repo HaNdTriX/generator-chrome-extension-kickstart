@@ -7,6 +7,8 @@ import plumber from 'gulp-plumber';
 import livereload from 'gulp-livereload';
 import args from './lib/args';
 
+const ENV = args.production ? 'production' : 'development';
+
 gulp.task('scripts', (cb) => {
   return gulp.src('app/scripts/*.js')
     .pipe(plumber())
@@ -16,7 +18,10 @@ gulp.task('scripts', (cb) => {
       watch: args.watch,
       plugins: [
         new webpack.DefinePlugin({
-          '__ENV__': JSON.stringify(args.production ? 'production' : 'development'),
+          'process.env': {
+            'NODE_ENV': JSON.stringify(ENV)
+          },
+          '__ENV__': JSON.stringify(ENV),
           '__VENDOR__': JSON.stringify(args.vendor)
         }),
       ].concat(args.production ? [
