@@ -326,7 +326,7 @@ module.exports = yeoman.generators.Base.extend({
             19: 'images/icon-19.png',
             38: 'images/icon-38.png'
           },
-          default_title: this.manifest.name,
+          default_title: '__MSG_browserActionTitle__',
           default_popup: 'pages/popup.html'
         };
         var title = (this.manifest.action === 1) ? 'browser_action' : 'page_action';

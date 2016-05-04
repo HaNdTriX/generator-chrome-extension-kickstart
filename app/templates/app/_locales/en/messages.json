@@ -13,6 +13,6 @@
   }<% if (action) { %>,
   "browserActionTitle": {
     "message": "<%= name %>",
-    "description": "The description of the application"
+    "description": "The title of the browser action button"
   }<% } %>
 }
