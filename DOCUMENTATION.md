@@ -48,9 +48,9 @@ and pack it for the webstore:
 	$ gulp pack --vendor=firefox
 
 
-## Working with multible vendors
+## Working with multiple vendors
 
-This generator supports the follwoing vendors:
+This generator supports the following vendors:
 
   * `chrome` <small>(default)</small>
   * `firefox`
