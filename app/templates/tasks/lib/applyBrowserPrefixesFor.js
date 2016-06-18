@@ -15,25 +15,43 @@
  * @param  {Object} manifest
  * @return {Object}
  */
-export default function applyBrowserPrefixesFor(vendor){
-  return function(manifest){
-    Object.keys(manifest).forEach((key)=>{
+export default function applyBrowserPrefixesFor(_vendor){
+  vendor = _vendor;
+  return iterator;
+};
+
+
+/**
+ * Vendor key
+ * @type {String}
+ */
+var vendor = '';
+
+
+/**
+ * Recursive iterator over all object keys
+ * @param  {Object} obj    Object to iterate over
+ * @return {Object}        Processed object
+ */
+function iterator(obj){
+    Object.keys(obj).forEach((key)=>{
       let match = key.match(/^__(chrome|firefox|opera)__(.*)/);
+      if(match){
 
-      if(!match){
-        return;
+        // Swap key with non prefixed name
+        if(match[1] === vendor){
+          obj[match[2]] = obj[key];
+        }
+
+        // Remove the prefixed key
+        // so it won't cause warings
+        delete obj[key];
       }
-
-      // Swap key with non prefixed name
-      if(match[1] === vendor){
-        manifest[match[2]] = manifest[key];
+      else {    // no match? try deeper
+        // Recurse over object's inner keys
+        if (typeof(obj[key]) === "object") iterator(obj[key]);
       }
-
-      // Remove the prefixed key
-      // so it won't cause warings
-      delete manifest[key];
 
     });
-    return manifest;
-  }
-};
+    return obj;
+}
