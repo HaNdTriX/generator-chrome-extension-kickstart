@@ -21,7 +21,7 @@ There are two kinds of entryfiles that create bundles.
 
 ### Build
 
-	$ gulp
+    $ gulp
 
 
 | Option         | Description                                                                                                                                           |
