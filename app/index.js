@@ -187,6 +187,7 @@ module.exports = yeoman.generators.Base.extend({
       // Meta
       this.appname = this.manifest.name = answers.name.replace(/\"/g, '\\"');
       this.appShortName = this.manifest.shortName = answers.shortName.replace(/\"/g, '\\"');
+      this.appDescription = answers.description;
       this.manifest.description = answers.description.replace(/\"/g, '\\"');
 
       // UI Actions
@@ -264,7 +265,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('package.json'),
         {
           name: slug(this.appname),
-          description: this.description
+          description: this.manifest.description
         }
       );
     },
@@ -275,7 +276,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('README.md'),
         {
           name: this.appname,
-          description: this.description
+          description: this.appDescription
         }
       );
     },
