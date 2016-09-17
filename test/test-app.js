@@ -5,8 +5,9 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('chrome-extension-kickstart:app', function() {
-  before(function(done) {
-    helpers.run(path.join(__dirname, '../app'))
+
+  before(function() {
+    return helpers.run(path.join(__dirname, '../app'))
       .withOptions({
         'skip-install': true
       })
@@ -48,7 +49,7 @@ describe('chrome-extension-kickstart:app', function() {
         ],
         promo: true
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates base files', function() {

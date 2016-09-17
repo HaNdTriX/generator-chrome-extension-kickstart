@@ -1,16 +1,17 @@
 'use strict';
 var path = require('path');
-var util = require('util');
-var spawn = require('child_process').spawn;
-var yeoman = require('yeoman-generator');
+var generators = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 var slug = require('slug');
 var mkdirp = require('mkdirp');
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = generators.Base.extend({
 
-  initializing: function() {
+  constructor: function() {
+    // calling the super constructor
+    generators.Base.apply(this, arguments);
+
     // load package
     this.pkg = require('../package.json');
 
@@ -24,163 +25,163 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: function() {
-    var cb = this.async();
-
     var prompts = [{
-      name: 'name',
-      message: 'What would you like to call this extension?',
-      default: (this.appname) ? this.appname : 'myAwesomeChromeApp'
+      type    : 'input',
+      name    : 'name',
+      message : 'What would you like to call this extension?',
+      default : this.appname
     }, {
-      name: 'shortName',
-      message: 'And how would you call it if you only had 12 characters (short_name)?',
-      default: function(answers) {
+      type    : 'input',
+      name    : 'shortName',
+      message : 'And how would you call it if you only had 12 characters (short_name)?',
+      default : function(answers) {
         return answers.name.substr(0, 11).trim();
       }
     }, {
-      name: 'description',
-      message: 'How would you like to describe this extension?',
-      default: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      name    : 'description',
+      message : 'How would you like to describe this extension?',
+      default : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }, {
-      type: 'list',
-      name: 'action',
-      message: 'Would you like to use UI Action?',
-      choices: [
+      type    : 'list',
+      name    : 'action',
+      message : 'Would you like to use UI Action?',
+      choices : [
         'No',
         'Browser',
         'Page'
       ]
     }, {
-      type: 'list',
-      name: 'overridePage',
-      message: 'Would you like to a override chrome page?',
-      choices: [
+      type    : 'list',
+      name    : 'overridePage',
+      message : 'Would you like to a override chrome page?',
+      choices : [
         'No',
         'Bookmarks Page',
         'History Page',
         'Newtab Page'
       ]
     }, {
-      type: 'checkbox',
-      name: 'uifeatures',
-      message: 'Would you like more UI Features?',
-      choices: [{
-        value: 'options',
-        name: 'Options Page',
-        checked: false
+      type    : 'checkbox',
+      name    : 'uifeatures',
+      message : 'Would you like more UI Features?',
+      choices : [{
+        value   : 'options',
+        name    : 'Options Page',
+        checked : false
       }, {
-        value: 'devtoolsPage',
-        name: 'Devtools Page',
-        checked: false
+        value   : 'devtoolsPage',
+        name    : 'Devtools Page',
+        checked : false
       }, {
-        value: 'contentscript',
-        name: 'Content Scripts',
-        checked: false
+        value   : 'contentscript',
+        name    : 'Content Scripts',
+        checked : false
       }, {
-        value: 'omnibox',
-        name: 'Omnibox',
-        checked: false
+        value   : 'omnibox',
+        name    : 'Omnibox',
+        checked : false
       }]
     }, {
-      type: 'checkbox',
-      name: 'permissions',
-      message: 'Would you like to use permissions?',
-      choices: [{
-        value: 'bookmarks',
-        name: 'Bookmarks',
-        checked: false
+      type    : 'checkbox',
+      name    : 'permissions',
+      message : 'Would you like to use permissions?',
+      choices : [{
+        value   : 'bookmarks',
+        name    : 'Bookmarks',
+        checked : false
       }, {
-        value: 'browsingData ',
-        name: 'BrowsingData ',
-        checked: false
+        value   : 'browsingData ',
+        name    : 'BrowsingData ',
+        checked : false
       }, {
-        value: 'clipboardRead',
-        name: 'ClipboardRead',
-        checked: false
+        value   : 'clipboardRead',
+        name    : 'ClipboardRead',
+        checked : false
       }, {
-        value: 'clipboardWrite',
-        name: 'ClipboardWrite',
-        checked: false
+        value   : 'clipboardWrite',
+        name    : 'ClipboardWrite',
+        checked : false
       }, {
-        value: 'contentSettings',
-        name: 'ContentSettings',
-        checked: false
+        value   : 'contentSettings',
+        name    : 'ContentSettings',
+        checked : false
       }, {
-        value: 'contextMenus',
-        name: 'ContextMenus',
-        checked: false
+        value   : 'contextMenus',
+        name    : 'ContextMenus',
+        checked : false
       }, {
-        value: 'cookies',
-        name: 'Cookies',
-        checked: false
+        value   : 'cookies',
+        name    : 'Cookies',
+        checked : false
       }, {
-        value: 'commands',
-        name: 'Commands',
-        checked: false
+        value   : 'commands',
+        name    : 'Commands',
+        checked : false
       }, {
-        value: 'debugger',
-        name: 'Debugger',
-        checked: false
+        value   : 'debugger',
+        name    : 'Debugger',
+        checked : false
       }, {
-        value: 'declarativeContent',
-        name: 'DeclarativeContent',
-        checked: false
+        value   : 'declarativeContent',
+        name    : 'DeclarativeContent',
+        checked : false
       }, {
-        value: 'history',
-        name: 'History',
-        checked: false
+        value   : 'history',
+        name    : 'History',
+        checked : false
       }, {
-        value: 'input',
-        name: 'Input',
-        checked: false
+        value   : 'input',
+        name    : 'Input',
+        checked : false
       }, {
-        value: 'management',
-        name: 'Management',
-        checked: false
+        value   : 'management',
+        name    : 'Management',
+        checked : false
       }, {
-        value: 'notifications',
-        name: 'Notifications',
-        checked: false
+        value   : 'notifications',
+        name    : 'Notifications',
+        checked : false
       }, {
-        value: 'pageCapture',
-        name: 'PageCapture',
-        checked: false
+        value   : 'pageCapture',
+        name    : 'PageCapture',
+        checked : false
       }, {
-        value: 'proxy',
-        name: 'Proxy',
-        checked: false
+        value   : 'proxy',
+        name    : 'Proxy',
+        checked : false
       }, {
-        value: 'tabs',
-        name: 'Tabs',
-        checked: false
+        value   : 'tabs',
+        name    : 'Tabs',
+        checked : false
       }, {
-        value: 'tabCapture',
-        name: 'TabCapture',
-        checked: false
+        value   : 'tabCapture',
+        name    : 'TabCapture',
+        checked : false
       }, {
-        value: 'topSites',
-        name: 'TopSites',
-        checked: false
+        value   : 'topSites',
+        name    : 'TopSites',
+        checked : false
       }, {
-        value: 'webNavigation',
-        name: 'WebNavigation',
-        checked: false
+        value   : 'webNavigation',
+        name    : 'WebNavigation',
+        checked : false
       }, {
-        value: 'webRequest',
-        name: 'WebRequest',
-        checked: false
+        value   : 'webRequest',
+        name    : 'WebRequest',
+        checked : false
       }, {
-        value: 'webRequestBlocking',
-        name: 'WebRequestBlocking',
-        checked: false
+        value   : 'webRequestBlocking',
+        name    : 'WebRequestBlocking',
+        checked : false
       }],
     }, {
-      type: 'confirm',
-      name: 'promo',
-      default: false,
-      message: 'Would you like to install promo images for the Chrome Web Store?'
+      type    : 'confirm',
+      name    : 'promo',
+      default : false,
+      message : 'Would you like to install promo images for the Chrome Web Store?'
     }];
 
-    this.prompt(prompts, function(answers) {
+    return this.prompt(prompts).then(function(answers) {
 
       var isChecked = function(choices, value) {
         return choices.indexOf(value) > -1;
@@ -196,57 +197,56 @@ module.exports = yeoman.generators.Base.extend({
       this.manifest.action = (answers.action === 'No') ? 0 : (answers.action === 'Browser') ? 1 : 2;
 
       // UI Features
-      this.manifest.options = isChecked(answers.uifeatures, 'options');
-      this.manifest.devtoolsPage = isChecked(answers.uifeatures, 'devtoolsPage');
-      this.manifest.omnibox = isChecked(answers.uifeatures, 'omnibox');
+      this.manifest.options       = isChecked(answers.uifeatures, 'options');
+      this.manifest.devtoolsPage  = isChecked(answers.uifeatures, 'devtoolsPage');
+      this.manifest.omnibox       = isChecked(answers.uifeatures, 'omnibox');
       this.manifest.contentscript = isChecked(answers.uifeatures, 'contentscript');
 
       // Permissions
-      this.manifest.permissions.bookmarks = isChecked(answers.permissions, 'bookmarks');
-      this.manifest.permissions.browsingData = isChecked(answers.permissions, 'browsingData');
-      this.manifest.permissions.clipboardRead = isChecked(answers.permissions, 'clipboardRead');
-      this.manifest.permissions.clipboardWrite = isChecked(answers.permissions, 'clipboardWrite');
-      this.manifest.permissions.commands = isChecked(answers.permissions, 'commands');
-      this.manifest.permissions.contentSettings = isChecked(answers.permissions, 'contentSettings');
-      this.manifest.permissions.contextMenus = isChecked(answers.permissions, 'contextMenus');
-      this.manifest.permissions.cookies = isChecked(answers.permissions, 'cookies');
-      this.manifest.permissions.debugger = isChecked(answers.permissions, 'debugger');
-      this.manifest.permissions.declarativeContent = isChecked(answers.permissions, 'declarativeContent');
-      this.manifest.permissions.history = isChecked(answers.permissions, 'history');
-      this.manifest.permissions.input = isChecked(answers.permissions, 'input');
-      this.manifest.permissions.management = isChecked(answers.permissions, 'management');
-      this.manifest.permissions.notifications = isChecked(answers.permissions, 'notifications');
-      this.manifest.permissions.pageCapture = isChecked(answers.permissions, 'pageCapture');
-      this.manifest.permissions.proxy = isChecked(answers.permissions, 'proxy');
-      this.manifest.permissions.tabCapture = isChecked(answers.permissions, 'tabCapture');
-      this.manifest.permissions.tabs = isChecked(answers.permissions, 'tabs');
-      this.manifest.permissions.topSites = isChecked(answers.permissions, 'topSites');
-      this.manifest.permissions.webNavigation = isChecked(answers.permissions, 'webNavigation');
-      this.manifest.permissions.webRequest = isChecked(answers.permissions, 'webRequest');
-      this.manifest.permissions.webRequestBlocking = isChecked(answers.permissions, 'webRequestBlocking');
+      this.manifest.permissions.bookmarks           = isChecked(answers.permissions, 'bookmarks');
+      this.manifest.permissions.browsingData        = isChecked(answers.permissions, 'browsingData');
+      this.manifest.permissions.clipboardRead       = isChecked(answers.permissions, 'clipboardRead');
+      this.manifest.permissions.clipboardWrite      = isChecked(answers.permissions, 'clipboardWrite');
+      this.manifest.permissions.commands            = isChecked(answers.permissions, 'commands');
+      this.manifest.permissions.contentSettings     = isChecked(answers.permissions, 'contentSettings');
+      this.manifest.permissions.contextMenus        = isChecked(answers.permissions, 'contextMenus');
+      this.manifest.permissions.cookies             = isChecked(answers.permissions, 'cookies');
+      this.manifest.permissions.debugger            = isChecked(answers.permissions, 'debugger');
+      this.manifest.permissions.declarativeContent  = isChecked(answers.permissions, 'declarativeContent');
+      this.manifest.permissions.history             = isChecked(answers.permissions, 'history');
+      this.manifest.permissions.input               = isChecked(answers.permissions, 'input');
+      this.manifest.permissions.management          = isChecked(answers.permissions, 'management');
+      this.manifest.permissions.notifications       = isChecked(answers.permissions, 'notifications');
+      this.manifest.permissions.pageCapture         = isChecked(answers.permissions, 'pageCapture');
+      this.manifest.permissions.proxy               = isChecked(answers.permissions, 'proxy');
+      this.manifest.permissions.tabCapture          = isChecked(answers.permissions, 'tabCapture');
+      this.manifest.permissions.tabs                = isChecked(answers.permissions, 'tabs');
+      this.manifest.permissions.topSites            = isChecked(answers.permissions, 'topSites');
+      this.manifest.permissions.webNavigation       = isChecked(answers.permissions, 'webNavigation');
+      this.manifest.permissions.webRequest          = isChecked(answers.permissions, 'webRequest');
+      this.manifest.permissions.webRequestBlocking  = isChecked(answers.permissions, 'webRequestBlocking');
 
       // Override a chrome page
       switch (answers.overridePage) {
         case 'Bookmarks Page':
-          this.manifest.overridePage = true;
+          this.manifest.overridePage  = true;
           this.manifest.bookmarksPage = true;
           break;
         case 'History Page':
-          this.manifest.overridePage = true;
-          this.manifest.historyPage = true;
+          this.manifest.overridePage  = true;
+          this.manifest.historyPage   = true;
           break;
         case 'Newtab Page':
-          this.manifest.overridePage = true;
-          this.manifest.newtabPage = true;
+          this.manifest.overridePage  = true;
+          this.manifest.newtabPage    = true;
           break;
         case 'No':
-          this.manifest.overridePage = false;
+          this.manifest.overridePage  = false;
           break;
       }
 
+      // Promo images
       this.promo = answers.promo;
-
-      cb();
     }.bind(this));
   },
 
@@ -264,8 +264,7 @@ module.exports = yeoman.generators.Base.extend({
     packageJSON: function() {
       this.fs.copyTpl(
         this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        {
+        this.destinationPath('package.json'), {
           name: slug(this.appname),
           description: this.manifest.description
         }
@@ -275,8 +274,7 @@ module.exports = yeoman.generators.Base.extend({
     readme: function() {
       this.fs.copyTpl(
         this.templatePath('README.md'),
-        this.destinationPath('README.md'),
-        {
+        this.destinationPath('README.md'), {
           name: this.appname,
           description: this.appDescription
         }
@@ -297,7 +295,7 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     promo: function() {
-      if(!this.promo){
+      if (!this.promo) {
         return;
       }
       mkdirp('promo');
@@ -422,8 +420,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath('app/manifest.json'),
-        this.destinationPath('app/manifest.json'),
-        {
+        this.destinationPath('app/manifest.json'), {
           items: this.manifest.items,
         }
       );
@@ -435,9 +432,9 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/popup.html', 'app/pages/popup.html');
-      this.copy('app/scripts/popup.js', 'app/scripts/popup.js');
-      this.copy('app/styles/popup.scss', 'app/styles/popup.scss');
+      this.copy('app/pages/popup.html',   'app/pages/popup.html');
+      this.copy('app/scripts/popup.js',   'app/scripts/popup.js');
+      this.copy('app/styles/popup.scss',  'app/styles/popup.scss');
       this.copy('app/images/icon-19.png', 'app/images/icon-19.png');
       this.copy('app/images/icon-38.png', 'app/images/icon-38.png');
     },
@@ -459,8 +456,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/options.html', 'app/pages/options.html');
-      this.copy('app/scripts/options.js', 'app/scripts/options.js');
+      this.copy('app/pages/options.html',  'app/pages/options.html');
+      this.copy('app/scripts/options.js',  'app/scripts/options.js');
       this.copy('app/styles/options.scss', 'app/styles/options.scss');
     },
 
@@ -469,8 +466,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/devtools.html', 'app/pages/devtools.html');
-      this.copy('app/scripts/devtools.js', 'app/scripts/devtools.js');
+      this.copy('app/pages/devtools.html',  'app/pages/devtools.html');
+      this.copy('app/scripts/devtools.js',  'app/scripts/devtools.js');
       this.copy('app/styles/devtools.scss', 'app/styles/devtools.scss');
     },
 
@@ -479,8 +476,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/history.html', 'app/pages/history.html');
-      this.copy('app/scripts/history.js', 'app/scripts/history.js');
+      this.copy('app/pages/history.html',  'app/pages/history.html');
+      this.copy('app/scripts/history.js',  'app/scripts/history.js');
       this.copy('app/styles/history.scss', 'app/styles/history.scss');
     },
 
@@ -489,8 +486,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/bookmarks.html', 'app/pages/bookmarks.html');
-      this.copy('app/scripts/bookmarks.js', 'app/scripts/bookmarks.js');
+      this.copy('app/pages/bookmarks.html',  'app/pages/bookmarks.html');
+      this.copy('app/scripts/bookmarks.js',  'app/scripts/bookmarks.js');
       this.copy('app/styles/bookmarks.scss', 'app/styles/bookmarks.scss');
     },
 
@@ -499,8 +496,8 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/pages/newtab.html', 'app/pages/newtab.html');
-      this.copy('app/scripts/newtab.js', 'app/scripts/newtab.js');
+      this.copy('app/pages/newtab.html',  'app/pages/newtab.html');
+      this.copy('app/scripts/newtab.js',  'app/scripts/newtab.js');
       this.copy('app/styles/newtab.scss', 'app/styles/newtab.scss');
     },
 
@@ -509,39 +506,39 @@ module.exports = yeoman.generators.Base.extend({
         return;
       }
 
-      this.copy('app/scripts/contentscript.js', 'app/scripts/contentscript.js');
+      this.copy('app/scripts/contentscript.js',  'app/scripts/contentscript.js');
       this.copy('app/styles/contentscript.scss', 'app/styles/contentscript.scss');
     },
 
     locales: function() {
       this.fs.copyTpl(
         this.templatePath('app/_locales/en/messages.json'),
-        this.destinationPath('app/_locales/en/messages.json'),
-        {
-          name: this.manifest.name,
-          shortName: this.manifest.shortName,
-          description: this.manifest.description,
-          action: this.manifest.action
+        this.destinationPath('app/_locales/en/messages.json'), {
+          name        : this.manifest.name,
+          shortName   : this.manifest.shortName,
+          description : this.manifest.description,
+          action      : this.manifest.action
         }
       );
     },
 
     assets: function() {
-      this.copy('app/images/icon-16.png', 'app/images/icon-16.png');
+      this.copy('app/images/icon-16.png',  'app/images/icon-16.png');
       this.copy('app/images/icon-128.png', 'app/images/icon-128.png');
-      this.copy('app/fonts/gitkeep', 'app/fonts/.gitkeep');
+      this.copy('app/fonts/gitkeep',       'app/fonts/.gitkeep');
     }
   },
 
+
   install: function() {
-    var self = this;
-    this.installDependencies({
-      bower: false,
-      npm: true,
-      skipInstall: this.options['skip-install'],
-      callback: function() {
-        self.log(yosay('Please run ' + chalk.red('gulp') + ' or  ' + chalk.yellow('gulp --watch') + ' and load the generated dist into chrome.'));
-      }
-    });
+    this.log('I\'m all done. Running ' + chalk.yellow('npm install') + ' for you to install the required dependencies. If this fails, try running the command yourself.')
+    this.npmInstall();
+  },
+
+  end: function() {
+    this.log(
+      yosay('Please run ' + chalk.red('gulp') + ' or  ' + chalk.yellow('gulp --watch') + ' and load the generated dist into chrome.')
+    );
   }
+
 });
