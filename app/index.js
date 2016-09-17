@@ -1,10 +1,10 @@
 'use strict';
-var path = require('path');
-var generators = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var slug = require('slug');
-var mkdirp = require('mkdirp');
+var chalk       = require('chalk');
+var generators  = require('yeoman-generator');
+var mkdirp      = require('mkdirp');
+var path        = require('path');
+var slug        = require('slug');
+var yosay       = require('yosay');
 
 module.exports = generators.Base.extend({
 
@@ -528,7 +528,6 @@ module.exports = generators.Base.extend({
       this.copy('app/fonts/gitkeep',       'app/fonts/.gitkeep');
     }
   },
-
 
   install: function() {
     this.log('I\'m all done. Running ' + chalk.yellow('npm install') + ' for you to install the required dependencies. If this fails, try running the command yourself.')
