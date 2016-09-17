@@ -33,7 +33,9 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'shortName',
       message: 'And how would you call it if you only had 12 characters (short_name)?',
-      default: (this.shortName) ? this.shortName : 'myChromeApp'
+      default: function(answers) {
+        return answers.name.substr(0, 11).trim();
+      }
     }, {
       name: 'description',
       message: 'How would you like to describe this extension?',
