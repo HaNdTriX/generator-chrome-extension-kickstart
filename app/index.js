@@ -435,7 +435,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/popup.html', 'app/pages/popup.html');
       this.copy('app/scripts/popup.js', 'app/scripts/popup.js');
-      this.copy('app/styles/popup.less', 'app/styles/popup.less');
+      this.copy('app/styles/popup.scss', 'app/styles/popup.scss');
       this.copy('app/images/icon-19.png', 'app/images/icon-19.png');
       this.copy('app/images/icon-38.png', 'app/images/icon-38.png');
     },
@@ -459,7 +459,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/options.html', 'app/pages/options.html');
       this.copy('app/scripts/options.js', 'app/scripts/options.js');
-      this.copy('app/styles/options.less', 'app/styles/options.less');
+      this.copy('app/styles/options.scss', 'app/styles/options.scss');
     },
 
     devtools: function() {
@@ -469,7 +469,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/devtools.html', 'app/pages/devtools.html');
       this.copy('app/scripts/devtools.js', 'app/scripts/devtools.js');
-      this.copy('app/styles/devtools.less', 'app/styles/devtools.less');
+      this.copy('app/styles/devtools.scss', 'app/styles/devtools.scss');
     },
 
     history: function() {
@@ -479,7 +479,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/history.html', 'app/pages/history.html');
       this.copy('app/scripts/history.js', 'app/scripts/history.js');
-      this.copy('app/styles/history.less', 'app/styles/history.less');
+      this.copy('app/styles/history.scss', 'app/styles/history.scss');
     },
 
     bookmarks: function() {
@@ -489,7 +489,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/bookmarks.html', 'app/pages/bookmarks.html');
       this.copy('app/scripts/bookmarks.js', 'app/scripts/bookmarks.js');
-      this.copy('app/styles/bookmarks.less', 'app/styles/bookmarks.less');
+      this.copy('app/styles/bookmarks.scss', 'app/styles/bookmarks.scss');
     },
 
     newtab: function() {
@@ -499,7 +499,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('app/pages/newtab.html', 'app/pages/newtab.html');
       this.copy('app/scripts/newtab.js', 'app/scripts/newtab.js');
-      this.copy('app/styles/newtab.less', 'app/styles/newtab.less');
+      this.copy('app/styles/newtab.scss', 'app/styles/newtab.scss');
     },
 
     contentscript: function() {
@@ -508,7 +508,7 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       this.copy('app/scripts/contentscript.js', 'app/scripts/contentscript.js');
-      this.copy('app/styles/contentscript.less', 'app/styles/contentscript.less');
+      this.copy('app/styles/contentscript.scss', 'app/styles/contentscript.scss');
     },
 
     locales: function() {

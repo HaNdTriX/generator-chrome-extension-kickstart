@@ -115,7 +115,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'app/pages/devtools.html',
       'app/scripts/devtools.js',
-      'app/styles/devtools.less'
+      'app/styles/devtools.scss'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"minimum_chrome_version":\s"10\.0"/],
@@ -127,7 +127,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'app/pages/newtab.html',
       'app/scripts/newtab.js',
-      'app/styles/newtab.less'
+      'app/styles/newtab.scss'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"newtab":\s"pages\/newtab\.html"/]
@@ -138,7 +138,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'app/pages/popup.html',
       'app/scripts/popup.js',
-      'app/styles/popup.less'
+      'app/styles/popup.scss'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"default_popup":\s"pages\/popup\.html"/]
@@ -149,7 +149,7 @@ describe('chrome-extension-kickstart:app', function() {
     assert.file([
       'app/pages/options.html',
       'app/scripts/options.js',
-      'app/styles/options.less'
+      'app/styles/options.scss'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"options_page":\s"pages\/options\.html"/],
@@ -160,7 +160,7 @@ describe('chrome-extension-kickstart:app', function() {
   it('creates contentscripts', function() {
     assert.file([
       'app/scripts/contentscript.js',
-      'app/styles/contentscript.less'
+      'app/styles/contentscript.scss'
     ]);
     assert.fileContent([
       ['app/manifest.json', /"content_scripts":\s\[/]
