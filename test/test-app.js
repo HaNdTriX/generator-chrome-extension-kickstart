@@ -73,7 +73,7 @@ describe('chrome-extension-kickstart:app', function() {
       'tasks/default.js',
       'tasks/fonts.js',
       'tasks/images.js',
-      'tasks/livereload.js',
+      'tasks/chromereload.js',
       'tasks/locales.js',
       'tasks/manifest.js',
       'tasks/pack.js',
