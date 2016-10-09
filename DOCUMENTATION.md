@@ -1,5 +1,42 @@
 # Documentation
 
+## Directory Structure
+
+    .
+    ├── app                     # Source files
+    ├──── _locales              # I18n files
+    ├──── images                # Images files
+    ├──── fonts                 # Font files
+    ├──── pages                 # HTML files (Glob: `/*.html`)
+    ├────── popup.html
+    ├────── example.html
+    ├──── scripts               # JS (ES2015) files (Glob: `/*.js`)
+    ├────── background.js
+    ├────── example.js
+    ├──── styles                # CSS files (Glob: `/*.(css|less|css)`)
+    ├────── popup.css
+    ├────── example.less
+    ├── dist                    # Compiled extensions
+    ├──── chrome                
+    ├──── firefox               
+    ├──── opera                 
+    ├── packages                # Packed extensions (.zip)
+    ├── tasks                   # Build system files 
+    ├──── lib
+    ├──── build.js
+    ├──── clean.js
+    ├──── default.js
+    ├──── images.js
+    ├──── livereload.js
+    ├──── locales.js
+    ├──── manifest.js
+    ├──── pack.js
+    ├──── pages.js
+    ├──── scripts.js            # webpack config
+    ├──── styles.js             # css/less/sass config
+    ├──── version.js
+    └── README.md
+
 ## Gulp Tasks
 
 ### Flags
@@ -101,10 +138,10 @@ Running `$ gulp manifest --vendor=chrome` will create the following `manifest.js
 
 This build tool also supports the following predefined variables. 
 
-| Variable     | Description                              |
-|--------------|------------------------------------------|
-| `__ENV__`    | will be the same as the development flag |
-| `__VENDOR__` | will be the same as the vendor flag      |
+| Variable                | Description                              |
+|-------------------------|------------------------------------------|
+| `process.env.NODE_ENV`  | will be the same as the development flag |
+| `__VENDOR__`            | will be the same as the vendor flag      |
 
 Use them in your code via:
 
