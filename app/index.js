@@ -53,7 +53,7 @@ module.exports = generators.Base.extend({
     }, {
       type    : 'list',
       name    : 'overridePage',
-      message : 'Would you like to a override chrome page?',
+      message : 'Would you like to override a chrome page?',
       choices : [
         'No',
         'Bookmarks Page',
