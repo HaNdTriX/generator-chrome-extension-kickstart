@@ -13,7 +13,7 @@ function getPackFileType(){
   }
 }
 
-gulp.task('pack', () => {
+gulp.task('pack', ['build'], () => {
   let name = packageDetails.name;
   let version = packageDetails.version;
   let filetype = getPackFileType();
