@@ -19,6 +19,7 @@
     "babel-core": "6.x.x",
     "babel-eslint": "6.x.x",
     "babel-loader": "6.x.x",
+    "babel-preset-env": "1.x.x",
     "babel-preset-es2015": "6.x.x",
     "babel-preset-stage-0": "6.x.x",
     "chai": "3.x.x",
@@ -47,7 +48,7 @@
     "gulp-zip": "3.x.x",
     "require-dir": "0.x.x",
     "vinyl-named": "1.x.x",
-    "webpack": "1.x.x",
+    "webpack": "2.x.x",
     "webpack-stream": "3.x.x",
     "yargs": "5.x.x"
   }
