@@ -33,20 +33,19 @@ gulp.task('scripts', (cb) => {
         new webpack.optimize.UglifyJsPlugin()
       ] : []),
       module: {
-        preLoaders: [{
+        rules: [{
           test: /\.js$/,
           loader: 'eslint-loader',
-          exclude: /node_modules/
-        }],
-        loaders: [{
+          exclude: /node_modules/,
+          enforce: 'pre'
+        },
+        {
           test: /\.js$/,
-          loader: 'babel'
+          loader: 'babel-loader',
+          enforce: 'post'
         }]
-      },
-      eslint: {
-        configFile: '.eslintrc'
       }
-    }, null, (err, stats) => {
+    }, webpack, (err, stats) => {
       log(`Finished '${colors.cyan('scripts')}'`, stats.toString({
         chunks: false,
         colors: true,

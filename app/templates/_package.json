@@ -47,7 +47,7 @@
     "gulp-zip": "3.x.x",
     "require-dir": "0.x.x",
     "vinyl-named": "1.x.x",
-    "webpack": "1.x.x",
+    "webpack": "2.x.x",
     "webpack-stream": "3.x.x",
     "yargs": "5.x.x"
   }
