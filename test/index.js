@@ -6,8 +6,8 @@ const path = require('path')
 const assert = require('yeoman-assert')
 const helpers = require('yeoman-test')
 
-describe('chrome-extension-kickstart:app', function () {
-  before(function () {
+describe('chrome-extension-kickstart:app', () => {
+  before(() => {
     return helpers.run(path.join(__dirname, '../app'))
       .withOptions({
         'skip-install': true
@@ -53,7 +53,7 @@ describe('chrome-extension-kickstart:app', function () {
       .toPromise()
   })
 
-  it('creates base files', function () {
+  it('creates base files', () => {
     assert.file([
       'package.json',
       '.editorconfig',
@@ -65,7 +65,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates tasks', function () {
+  it('creates tasks', () => {
     assert.file([
       'gulpfile.babel.js',
       'tasks/lib/applyBrowserPrefixesFor.js',
@@ -86,7 +86,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates promo', function () {
+  it('creates promo', () => {
     assert.file([
       'promo/Chrome-Webstore-Icon_128x128.png',
       'promo/Promo-Image-Large_920x680.png',
@@ -97,7 +97,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates locales', function () {
+  it('creates locales', () => {
     assert.file([
       'app/_locales/en/messages.json'
     ])
@@ -107,13 +107,13 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates fonts directory', function () {
+  it('creates fonts directory', () => {
     assert.file([
       'app/fonts/.gitkeep'
     ])
   })
 
-  it('creates devtools page', function () {
+  it('creates devtools page', () => {
     assert.file([
       'app/pages/devtools.html',
       'app/scripts/devtools.js',
@@ -125,7 +125,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates newtab files', function () {
+  it('creates newtab files', () => {
     assert.file([
       'app/pages/newtab.html',
       'app/scripts/newtab.js',
@@ -136,7 +136,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates all popup files', function () {
+  it('creates all popup files', () => {
     assert.file([
       'app/pages/popup.html',
       'app/scripts/popup.js',
@@ -147,7 +147,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates options', function () {
+  it('creates options', () => {
     assert.file([
       'app/pages/options.html',
       'app/scripts/options.js',
@@ -159,7 +159,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates contentscripts', function () {
+  it('creates contentscripts', () => {
     assert.file([
       'app/scripts/contentscript.js',
       'app/styles/contentscript.scss'
@@ -169,7 +169,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('creates a background page', function () {
+  it('creates a background page', () => {
     assert.file([
       'app/scripts/background.js'
     ])
@@ -178,7 +178,7 @@ describe('chrome-extension-kickstart:app', function () {
     ])
   })
 
-  it('sets permissions to manifest', function () {
+  it('sets permissions to manifest', () => {
     assert.fileContent([
       ['app/manifest.json', /"bookmarks"/],
       ['app/manifest.json', /"browsingData"/],
