@@ -19,7 +19,7 @@ gulp.task('scripts', (cb) => {
     }))
     .pipe(named())
     .pipe(gulpWebpack({
-      devtool: args.sourcemaps ? 'inline-source-map': null,
+      devtool: args.sourcemaps ? 'inline-source-map': false,
       watch: args.watch,
       plugins: [
         new webpack.DefinePlugin({
