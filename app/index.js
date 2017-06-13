@@ -1,16 +1,12 @@
-'use strict'
-var chalk = require('chalk')
-var generators = require('yeoman-generator')
-var mkdirp = require('mkdirp')
-var path = require('path')
-var slug = require('slug')
-var yosay = require('yosay')
+const chalk = require('chalk')
+const Generator = require('yeoman-generator')
+const path = require('path')
+const slug = require('slug')
+const yosay = require('yosay')
 
-module.exports = generators.Base.extend({
-
-  constructor: function () {
-    // calling the super constructor
-    generators.Base.apply(this, arguments)
+module.exports = class extends Generator {
+  constructor (...args) {
+    super(...args)
 
     // load package
     this.pkg = require('../package.json')
@@ -22,10 +18,10 @@ module.exports = generators.Base.extend({
     this.manifest = {
       permissions: {}
     }
-  },
+  }
 
-  prompting: function () {
-    var prompts = [{
+  prompting () {
+    const prompts = [{
       type: 'input',
       name: 'name',
       message: 'What would you like to call this extension?',
@@ -34,9 +30,7 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'shortName',
       message: 'And how would you call it if you only had 12 characters (short_name)?',
-      default: function (answers) {
-        return answers.name.substr(0, 11).trim()
-      }
+      default: answers => answers.name.substr(0, 11).trim()
     }, {
       name: 'description',
       message: 'How would you like to describe this extension?',
@@ -182,9 +176,7 @@ module.exports = generators.Base.extend({
     }]
 
     return this.prompt(prompts).then(function (answers) {
-      var isChecked = function (choices, value) {
-        return choices.indexOf(value) > -1
-      }
+      const isChecked = (choices, value) => choices.indexOf(value) > -1
 
       // Meta
       this.appname = this.manifest.name = answers.name.replace(/"/g, '\\"')
@@ -247,293 +239,394 @@ module.exports = generators.Base.extend({
       // Promo images
       this.promo = answers.promo
     }.bind(this))
-  },
+  }
 
-  writing: {
+  tasks () {
+    this.fs.copy(
+      this.templatePath('gulpfile.babel.js'),
+      this.destinationPath('gulpfile.babel.js')
+    )
 
-    app: function () {
-      mkdirp('app')
-    },
+    this.fs.copy(
+      this.templatePath('tasks/**/*'),
+      this.destinationPath('tasks')
+    )
+  }
 
-    gulpfile: function () {
-      this.copy('gulpfile.babel.js', 'gulpfile.babel.js')
-      this.directory('tasks', 'tasks')
-    },
-
-    packageJSON: function () {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'), {
-          name: slug(this.appname),
-          description: this.manifest.description
-        }
-      )
-    },
-
-    readme: function () {
-      this.fs.copyTpl(
-        this.templatePath('README.md'),
-        this.destinationPath('README.md'), {
-          name: this.appname,
-          description: this.appDescription
-        }
-      )
-    },
-
-    git: function () {
-      this.copy('gitignore', '.gitignore')
-      this.copy('gitattributes', '.gitattributes')
-    },
-
-    eslint: function () {
-      this.copy('eslintrc', '.eslintrc')
-    },
-
-    babelrc: function () {
-      this.copy('babelrc', '.babelrc')
-    },
-
-    promo: function () {
-      if (!this.promo) {
-        return
+  packageJSON () {
+    this.fs.copyTpl(
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'), {
+        name: slug(this.appname),
+        description: this.manifest.description
       }
-      mkdirp('promo')
-      this.copy('promo/Chrome-Webstore-Icon_128x128.png', 'promo/Chrome-Webstore-Icon_128x128.png')
-      this.copy('promo/Promo-Image-Large_920x680.png', 'promo/Promo-Image-Large_920x680.png')
-      this.copy('promo/Promo-Image-Marquee_1400x560.png', 'promo/Promo-Image-Marquee_1400x560.png')
-      this.copy('promo/Promo-Image-Small_440x280.png', 'promo/Promo-Image-Small_440x280.png')
-      this.copy('promo/Screenshot_1280x800.png', 'promo/Screenshot_1280x800.png')
-      this.copy('promo/Screenshot_640x400.png', 'promo/Screenshot_640x400.png')
-    },
+    )
+  }
 
-    editorConfig: function () {
-      this.copy('editorconfig', '.editorconfig')
-    },
-
-    manifest: function () {
-      var manifest = {}
-      var permissions = []
-      var items = []
-
-      function buildJSONPart (part) {
-        return JSON.stringify(part, null, 2).replace(/\n/g, '\n  ')
+  readme () {
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'), {
+        name: this.appname,
+        description: this.appDescription
       }
+    )
+  }
+
+  git () {
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore')
+    )
+
+    this.fs.copy(
+      this.templatePath('gitattributes'),
+      this.destinationPath('.gitattributes')
+    )
+  }
+
+  eslint () {
+    this.fs.copy(
+      this.templatePath('eslintrc'),
+      this.destinationPath('.eslintrc')
+    )
+  }
+
+  babelrc () {
+    this.fs.copy(
+      this.templatePath('babelrc'),
+      this.destinationPath('.babelrc')
+    )
+  }
+
+  promo () {
+    if (!this.promo) {
+      return
+    }
+
+    this.fs.copy(
+      this.templatePath('babelrc'),
+      this.destinationPath('.babelrc')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Chrome-Webstore-Icon_128x128.png'),
+      this.destinationPath('promo/Chrome-Webstore-Icon_128x128.png')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Promo-Image-Large_920x680.png'),
+      this.destinationPath('promo/Promo-Image-Large_920x680.png')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Promo-Image-Marquee_1400x560.png'),
+      this.destinationPath('promo/Promo-Image-Marquee_1400x560.png')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Promo-Image-Small_440x280.png'),
+      this.destinationPath('promo/Promo-Image-Small_440x280.png')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Screenshot_1280x800.png'),
+      this.destinationPath('promo/Screenshot_1280x800.png')
+    )
+    this.fs.copy(
+      this.templatePath('promo/Screenshot_640x400.png'),
+      this.destinationPath('promo/Screenshot_640x400.png')
+    )
+  }
+
+  editorConfig () {
+    this.fs.copy(
+      this.templatePath('editorconfig'),
+      this.destinationPath('.editorconfig')
+    )
+  }
+
+  manifest () {
+    var manifest = {}
+    var permissions = []
+    var items = []
+
+    function buildJSONPart (part) {
+      return JSON.stringify(part, null, 2).replace(/\n/g, '\n  ')
+    }
 
       // add browser / page action field
-      if (this.manifest.action > 0) {
-        var action = {
-          default_icon: {
-            19: 'images/icon-19.png',
-            38: 'images/icon-38.png'
-          },
-          default_title: '__MSG_browserActionTitle__',
-          default_popup: 'pages/popup.html'
-        }
-        var title = (this.manifest.action === 1) ? 'browser_action' : 'page_action'
-        manifest[title] = buildJSONPart(action)
+    if (this.manifest.action > 0) {
+      var action = {
+        default_icon: {
+          19: 'images/icon-19.png',
+          38: 'images/icon-38.png'
+        },
+        default_title: '__MSG_browserActionTitle__',
+        default_popup: 'pages/popup.html'
       }
+      var title = (this.manifest.action === 1) ? 'browser_action' : 'page_action'
+      manifest[title] = buildJSONPart(action)
+    }
 
       // add options page field.
-      if (this.manifest.options) {
-        manifest.options_page = '"pages/options.html"'
-        manifest.options_ui = buildJSONPart({
-          'page': 'pages/options.html',
-          'chrome_style': true
-        })
-      }
+    if (this.manifest.options) {
+      manifest.options_page = '"pages/options.html"'
+      manifest.options_ui = buildJSONPart({
+        'page': 'pages/options.html',
+        'chrome_style': true
+      })
+    }
 
       // add devtool page field.
-      if (this.manifest.devtoolsPage) {
-        manifest.minimum_chrome_version = '"10.0"'
-        manifest.devtools_page = '"pages/devtools.html"'
-      }
+    if (this.manifest.devtoolsPage) {
+      manifest.minimum_chrome_version = '"10.0"'
+      manifest.devtools_page = '"pages/devtools.html"'
+    }
 
       // Override Pages
-      if (this.manifest.overridePage) {
+    if (this.manifest.overridePage) {
         // add history page field.
-        if (this.manifest.historyPage) {
-          manifest.chrome_url_overrides = buildJSONPart({
-            history: 'pages/history.html'
-          })
-        }
-
-        // add bookmarks page field.
-        if (this.manifest.bookmarksPage) {
-          manifest.chrome_url_overrides = buildJSONPart({
-            bookmarks: 'pages/bookmarks.html'
-          })
-        }
-
-        // add newtab page field.
-        if (this.manifest.newtabPage) {
-          manifest.chrome_url_overrides = buildJSONPart({
-            newtab: 'pages/newtab.html'
-          })
-        }
-      }
-
-      // add omnibox keyword field.
-      if (this.manifest.omnibox) {
-        manifest.omnibox = buildJSONPart({
-          keyword: this.manifest.shortName
+      if (this.manifest.historyPage) {
+        manifest.chrome_url_overrides = buildJSONPart({
+          history: 'pages/history.html'
         })
       }
 
-      // add contentscript field.
-      if (this.manifest.contentscript) {
-        var contentscript = [{
-          matches: ['http://*/*', 'https://*/*'],
-          css: ['styles/contentscript.css'],
-          js: ['scripts/contentscript.js'],
-          run_at: 'document_end',
-          all_frames: false
-        }]
-
-        manifest.content_scripts = buildJSONPart(contentscript)
+        // add bookmarks page field.
+      if (this.manifest.bookmarksPage) {
+        manifest.chrome_url_overrides = buildJSONPart({
+          bookmarks: 'pages/bookmarks.html'
+        })
       }
+
+        // add newtab page field.
+      if (this.manifest.newtabPage) {
+        manifest.chrome_url_overrides = buildJSONPart({
+          newtab: 'pages/newtab.html'
+        })
+      }
+    }
+
+      // add omnibox keyword field.
+    if (this.manifest.omnibox) {
+      manifest.omnibox = buildJSONPart({
+        keyword: this.manifest.shortName
+      })
+    }
+
+      // add contentscript field.
+    if (this.manifest.contentscript) {
+      const contentscript = [{
+        matches: ['http://*/*', 'https://*/*'],
+        css: ['styles/contentscript.css'],
+        js: ['scripts/contentscript.js'],
+        run_at: 'document_end',
+        all_frames: false
+      }]
+
+      manifest.content_scripts = buildJSONPart(contentscript)
+    }
 
       // add generate permission field.
-      for (var p in this.manifest.permissions) {
-        if (this.manifest.permissions[p]) {
-          permissions.push(p)
-        }
+    for (let p in this.manifest.permissions) {
+      if (this.manifest.permissions[p]) {
+        permissions.push(p)
       }
+    }
 
       // add generic match pattern field.
-      if (this.manifest.permissions.tabs) {
-        permissions.push('<all_urls>')
-      }
+    if (this.manifest.permissions.tabs) {
+      permissions.push('<all_urls>')
+    }
 
       // add permissions
-      if (permissions.length > 0) {
-        manifest.permissions = buildJSONPart(permissions)
-      }
-
-      for (var i in manifest) {
-        items.push(['  "', i, '": ', manifest[i]].join(''))
-      }
-
-      this.manifest.items = (items.length > 0) ? ',\n' + items.join(',\n') : ''
-
-      this.fs.copyTpl(
-        this.templatePath('app/manifest.json'),
-        this.destinationPath('app/manifest.json'), {
-          items: this.manifest.items
-        }
-      )
-    },
-
-    actions: function () {
-      if (this.manifest.action === 0) {
-        return
-      }
-
-      this.copy('app/pages/popup.html', 'app/pages/popup.html')
-      this.copy('app/scripts/popup.js', 'app/scripts/popup.js')
-      this.copy('app/styles/popup.scss', 'app/styles/popup.scss')
-      this.copy('app/images/icon-19.png', 'app/images/icon-19.png')
-      this.copy('app/images/icon-38.png', 'app/images/icon-38.png')
-    },
-
-    eventpage: function () {
-      var backgroundjs = 'background.js'
-
-      if (this.manifest.action === 2) {
-        backgroundjs = 'background.pageaction.js'
-      } else if (this.manifest.action === 1) {
-        backgroundjs = 'background.browseraction.js'
-      }
-
-      this.copy('app/scripts/' + backgroundjs, 'app/scripts/background.js')
-    },
-
-    options: function () {
-      if (!this.manifest.options) {
-        return
-      }
-
-      this.copy('app/pages/options.html', 'app/pages/options.html')
-      this.copy('app/scripts/options.js', 'app/scripts/options.js')
-      this.copy('app/styles/options.scss', 'app/styles/options.scss')
-    },
-
-    devtools: function () {
-      if (!this.manifest.devtoolsPage) {
-        return
-      }
-
-      this.copy('app/pages/devtools.html', 'app/pages/devtools.html')
-      this.copy('app/scripts/devtools.js', 'app/scripts/devtools.js')
-      this.copy('app/styles/devtools.scss', 'app/styles/devtools.scss')
-    },
-
-    history: function () {
-      if (!this.manifest.historyPage) {
-        return
-      }
-
-      this.copy('app/pages/history.html', 'app/pages/history.html')
-      this.copy('app/scripts/history.js', 'app/scripts/history.js')
-      this.copy('app/styles/history.scss', 'app/styles/history.scss')
-    },
-
-    bookmarks: function () {
-      if (!this.manifest.bookmarksPage) {
-        return
-      }
-
-      this.copy('app/pages/bookmarks.html', 'app/pages/bookmarks.html')
-      this.copy('app/scripts/bookmarks.js', 'app/scripts/bookmarks.js')
-      this.copy('app/styles/bookmarks.scss', 'app/styles/bookmarks.scss')
-    },
-
-    newtab: function () {
-      if (!this.manifest.newtabPage) {
-        return
-      }
-
-      this.copy('app/pages/newtab.html', 'app/pages/newtab.html')
-      this.copy('app/scripts/newtab.js', 'app/scripts/newtab.js')
-      this.copy('app/styles/newtab.scss', 'app/styles/newtab.scss')
-    },
-
-    contentscript: function () {
-      if (!this.manifest.contentscript) {
-        return
-      }
-
-      this.copy('app/scripts/contentscript.js', 'app/scripts/contentscript.js')
-      this.copy('app/styles/contentscript.scss', 'app/styles/contentscript.scss')
-    },
-
-    locales: function () {
-      this.fs.copyTpl(
-        this.templatePath('app/_locales/en/messages.json'),
-        this.destinationPath('app/_locales/en/messages.json'), {
-          name: this.manifest.name,
-          shortName: this.manifest.shortName,
-          description: this.manifest.description,
-          action: this.manifest.action
-        }
-      )
-    },
-
-    assets: function () {
-      this.copy('app/images/icon-16.png', 'app/images/icon-16.png')
-      this.copy('app/images/icon-128.png', 'app/images/icon-128.png')
-      this.copy('app/fonts/gitkeep', 'app/fonts/.gitkeep')
+    if (permissions.length > 0) {
+      manifest.permissions = buildJSONPart(permissions)
     }
-  },
 
-  install: function () {
+    for (let i in manifest) {
+      items.push(['  "', i, '": ', manifest[i]].join(''))
+    }
+
+    this.manifest.items = (items.length > 0) ? ',\n' + items.join(',\n') : ''
+
+    this.fs.copyTpl(
+      this.templatePath('app/manifest.json'),
+      this.destinationPath('app/manifest.json'), {
+        items: this.manifest.items
+      }
+    )
+  }
+
+  actions () {
+    if (this.manifest.action === 0) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/popup.html'),
+      this.destinationPath('app/pages/popup.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/popup.js'),
+      this.destinationPath('app/scripts/popup.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/popup.scss'),
+      this.destinationPath('app/styles/popup.scss')
+    )
+    this.fs.copy(
+      this.templatePath('app/images/icon-19.png'),
+      this.destinationPath('app/images/icon-19.png')
+    )
+    this.fs.copy(
+      this.templatePath('app/images/icon-38.png'),
+      this.destinationPath('app/images/icon-38.png')
+    )
+  }
+
+  backgroundpage () {
+    let filename = 'background.js'
+
+    if (this.manifest.action === 2) {
+      filename = 'background.pageaction.js'
+    } else if (this.manifest.action === 1) {
+      filename = 'background.browseraction.js'
+    }
+
+    this.fs.copy(
+      this.templatePath(`app/scripts/${filename}`),
+      this.destinationPath('app/scripts/background.js')
+    )
+  }
+
+  options () {
+    if (!this.manifest.options) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/options.html'),
+      this.destinationPath('app/pages/options.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/options.js'),
+      this.destinationPath('app/scripts/options.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/options.scss'),
+      this.destinationPath('app/styles/options.scss')
+    )
+  }
+
+  devtools () {
+    if (!this.manifest.devtoolsPage) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/devtools.html'),
+      this.destinationPath('app/pages/devtools.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/devtools.js'),
+      this.destinationPath('app/scripts/devtools.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/devtools.scss'),
+      this.destinationPath('app/styles/devtools.scss')
+    )
+  }
+
+  history () {
+    if (!this.manifest.historyPage) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/history.html'),
+      this.destinationPath('app/pages/history.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/history.js'),
+      this.destinationPath('app/scripts/history.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/history.scss'),
+      this.destinationPath('app/styles/history.scss')
+    )
+  }
+
+  bookmarks () {
+    if (!this.manifest.bookmarksPage) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/bookmarks.html'),
+      this.destinationPath('app/pages/bookmarks.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/bookmarks.js'),
+      this.destinationPath('app/scripts/bookmarks.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/bookmarks.scss'),
+      this.destinationPath('app/styles/bookmarks.scss')
+    )
+  }
+
+  newtab () {
+    if (!this.manifest.newtabPage) return
+
+    this.fs.copy(
+      this.templatePath('app/pages/newtab.html'),
+      this.destinationPath('app/pages/newtab.html')
+    )
+    this.fs.copy(
+      this.templatePath('app/scripts/newtab.js'),
+      this.destinationPath('app/scripts/newtab.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/newtab.scss'),
+      this.destinationPath('app/styles/newtab.scss')
+    )
+  }
+
+  contentscript () {
+    if (!this.manifest.contentscript) return
+
+    this.fs.copy(
+      this.templatePath('app/scripts/contentscript.js'),
+      this.destinationPath('app/scripts/contentscript.js')
+    )
+    this.fs.copy(
+      this.templatePath('app/styles/contentscript.scss'),
+      this.destinationPath('app/styles/contentscript.scss')
+    )
+  }
+
+  locales () {
+    this.fs.copyTpl(
+      this.templatePath('app/_locales/en/messages.json'),
+      this.destinationPath('app/_locales/en/messages.json'), {
+        name: this.manifest.name,
+        shortName: this.manifest.shortName,
+        description: this.manifest.description,
+        action: this.manifest.action
+      }
+    )
+  }
+
+  assets () {
+    this.fs.copy(
+      this.templatePath('app/images/icon-16.png'),
+      this.destinationPath('app/images/icon-16.png')
+    )
+    this.fs.copy(
+      this.templatePath('app/images/icon-128.png'),
+      this.destinationPath('app/images/icon-128.png')
+    )
+    this.fs.copy(
+      this.templatePath('app/fonts/gitkeep'),
+      this.destinationPath('app/fonts/.gitkeep')
+    )
+  }
+
+  installing () {
     this.log('I\'m all done. Running ' + chalk.yellow('npm install') + ' for you to install the required dependencies. If this fails, try running the command yourself.')
     this.npmInstall()
-  },
+  }
 
-  end: function () {
+  end () {
     this.log(
       yosay('Please run ' + chalk.red('gulp') + ' or  ' + chalk.yellow('gulp --watch') + ' and load the generated dist into chrome.')
     )
   }
-
-})
+}
