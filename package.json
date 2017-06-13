@@ -14,8 +14,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "npm run standard && mocha",
-    "standard": "standard"
+    "test": "npm run lint && mocha",
+    "lint": "standard"
   },
   "files": [
     "app"
