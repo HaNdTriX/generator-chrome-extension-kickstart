@@ -1,1 +1,1 @@
-console.log('\'Allo \'Allo! Bookmarks');
+console.log('\'Allo \'Allo! Bookmarks')

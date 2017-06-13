@@ -20,6 +20,9 @@
   "files": [
     "app"
   ],
+  "standard": {
+    "globals": [ "chrome" ]
+  },
   "keywords": [
     "yeoman-generator",
     "webpack",

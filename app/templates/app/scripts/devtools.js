@@ -1,1 +1,1 @@
-console.log('\'Allo \'Allo! Devtools Extension');
+console.log('\'Allo \'Allo! Devtools Extension')

@@ -1,1 +1,1 @@
-console.log('\'Allo \'Allo! Option');
+console.log('\'Allo \'Allo! Option')

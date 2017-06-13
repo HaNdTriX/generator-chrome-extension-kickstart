@@ -1,1 +1,1 @@
-console.log('\'Allo \'Allo! History Extension');
+console.log('\'Allo \'Allo! History Extension')

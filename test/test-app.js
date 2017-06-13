@@ -1,12 +1,13 @@
-'use strict';
+'use strict'
 
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+/* global describe, before, it */
 
-describe('chrome-extension-kickstart:app', function() {
+var path = require('path')
+var assert = require('yeoman-assert')
+var helpers = require('yeoman-test')
 
-  before(function() {
+describe('chrome-extension-kickstart:app', function () {
+  before(function () {
     return helpers.run(path.join(__dirname, '../app'))
       .withOptions({
         'skip-install': true
@@ -49,10 +50,10 @@ describe('chrome-extension-kickstart:app', function() {
         ],
         promo: true
       })
-      .toPromise();
-  });
+      .toPromise()
+  })
 
-  it('creates base files', function() {
+  it('creates base files', function () {
     assert.file([
       'package.json',
       '.editorconfig',
@@ -61,10 +62,10 @@ describe('chrome-extension-kickstart:app', function() {
       '.gitattributes',
       '.gitignore',
       'README.md'
-    ]);
-  });
+    ])
+  })
 
-  it('creates tasks', function() {
+  it('creates tasks', function () {
     assert.file([
       'gulpfile.babel.js',
       'tasks/lib/applyBrowserPrefixesFor.js',
@@ -82,102 +83,102 @@ describe('chrome-extension-kickstart:app', function() {
       'tasks/scripts.js',
       'tasks/styles.js',
       'tasks/version.js'
-    ]);
-  });
+    ])
+  })
 
-  it('creates promo', function() {
+  it('creates promo', function () {
     assert.file([
       'promo/Chrome-Webstore-Icon_128x128.png',
       'promo/Promo-Image-Large_920x680.png',
       'promo/Promo-Image-Marquee_1400x560.png',
       'promo/Promo-Image-Small_440x280.png',
       'promo/Screenshot_1280x800.png',
-      'promo/Screenshot_640x400.png',
-    ]);
-  });
+      'promo/Screenshot_640x400.png'
+    ])
+  })
 
-  it('creates locales', function() {
+  it('creates locales', function () {
     assert.file([
       'app/_locales/en/messages.json'
-    ]);
+    ])
 
     assert.fileContent([
       ['app/manifest.json', /"default_locale":\s"en",/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates fonts directory', function() {
+  it('creates fonts directory', function () {
     assert.file([
       'app/fonts/.gitkeep'
-    ]);
-  });
+    ])
+  })
 
-  it('creates devtools page', function() {
+  it('creates devtools page', function () {
     assert.file([
       'app/pages/devtools.html',
       'app/scripts/devtools.js',
       'app/styles/devtools.scss'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"minimum_chrome_version":\s"10\.0"/],
       ['app/manifest.json', /"devtools_page":\s"pages\/devtools\.html"/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates newtab files', function() {
+  it('creates newtab files', function () {
     assert.file([
       'app/pages/newtab.html',
       'app/scripts/newtab.js',
       'app/styles/newtab.scss'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"newtab":\s"pages\/newtab\.html"/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates all popup files', function() {
+  it('creates all popup files', function () {
     assert.file([
       'app/pages/popup.html',
       'app/scripts/popup.js',
       'app/styles/popup.scss'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"default_popup":\s"pages\/popup\.html"/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates options', function() {
+  it('creates options', function () {
     assert.file([
       'app/pages/options.html',
       'app/scripts/options.js',
       'app/styles/options.scss'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"options_page":\s"pages\/options\.html"/],
       ['app/manifest.json', /"options_ui": {\s+"page": "pages\/options.html",\s+"chrome_style": true\s+}/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates contentscripts', function() {
+  it('creates contentscripts', function () {
     assert.file([
       'app/scripts/contentscript.js',
       'app/styles/contentscript.scss'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"content_scripts":\s\[/]
-    ]);
-  });
+    ])
+  })
 
-  it('creates a background page', function() {
+  it('creates a background page', function () {
     assert.file([
       'app/scripts/background.js'
-    ]);
+    ])
     assert.fileContent([
       ['app/manifest.json', /"background":\s\{/]
-    ]);
-  });
+    ])
+  })
 
-  it('sets permissions to manifest', function() {
+  it('sets permissions to manifest', function () {
     assert.fileContent([
       ['app/manifest.json', /"bookmarks"/],
       ['app/manifest.json', /"browsingData"/],
@@ -201,8 +202,7 @@ describe('chrome-extension-kickstart:app', function() {
       ['app/manifest.json', /"webNavigation"/],
       ['app/manifest.json', /"webRequest"/],
       ['app/manifest.json', /"webRequestBlocking"/],
-      ['app/manifest.json', /\s+"http:\/\/\*\/\*",\s+"https:\/\/\*\/\*"/],
-    ]);
-  });
-
-});
+      ['app/manifest.json', /\s+"http:\/\/\*\/\*",\s+"https:\/\/\*\/\*"/]
+    ])
+  })
+})

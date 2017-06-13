@@ -1,1 +1,1 @@
-console.log('\'Allo \'Allo! New Tab');
+console.log('\'Allo \'Allo! New Tab')
