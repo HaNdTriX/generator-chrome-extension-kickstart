@@ -14,7 +14,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "npm run standard && mocha",
+    "standard": "standard"
   },
   "files": [
     "app"
@@ -41,7 +42,8 @@
     "yosay": "^1.2.0"
   },
   "devDependencies": {
-    "mocha": "3.x.x"
+    "mocha": "3.x.x",
+    "standard": "^10.0.2"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
