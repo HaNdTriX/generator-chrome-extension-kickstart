@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - 'stable'
-  - '4'
+  - '7'
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-chrome-extension-kickstart' ]; then cd .. && eval "mv $currentfolder generator-chrome-extension-kickstart" && cd generator-chrome-extension-kickstart; fi
