@@ -1,6 +1,6 @@
 {
   "name": "generator-chrome-extension-kickstart",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
