@@ -6,9 +6,9 @@
   "scripts": {
     "start": "npm run dev:chrome",
     "build": "npm run build:chrome",
-    "build:chrome": "gulp --production --vendor=chrome && gulp pack --vendor=chrome",
-    "build:firefox": "gulp --production --vendor=firefox && gulp pack --vendor=firefox",
-    "build:opera": "gulp --production --vendor=opera && gulp pack --vendor=opera",
+    "build:chrome": "gulp pack --production --vendor=chrome",
+    "build:firefox": "gulp pack --production --vendor=firefox",
+    "build:opera": "gulp pack --production --vendor=opera",
     "dev": "npm run dev:chrome",
     "dev:chrome": "gulp --watch --vendor=chrome",
     "dev:firefox": "gulp --watch --vendor=firefox",
