@@ -23,11 +23,8 @@ gulp.task('scripts', (cb) => {
       watch: args.watch,
       plugins: [
         new webpack.DefinePlugin({
-          'process.env': {
-            'NODE_ENV': JSON.stringify(ENV)
-          },
-          '__ENV__': JSON.stringify(ENV),
-          '__VENDOR__': JSON.stringify(args.vendor)
+          'process.env.NODE_ENV': JSON.stringify(ENV),
+          'process.env.VENDOR': JSON.stringify(args.vendor)
         })
       ].concat(args.production ? [
         new webpack.optimize.UglifyJsPlugin()

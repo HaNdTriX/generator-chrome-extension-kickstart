@@ -46,9 +46,9 @@ You can influence most predefined gulp tasks by adding flags to the gulp command
 | Flag           | Description                                                                                                                                                    |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include `livereload.js` in your bundle.                               |
-| `--production` | Minifies all assets and sets the `__ENV__` variable to `production`                                                                                            |
+| `--production` | Minifies all assets and sets the `process.env.NODE_ENV` variable to `production`                                                                                            |
 | `--verbose`    | Log additional data to the console.                                                                                                                            |
-| `--vendor`     | Compile the extension for different vendors (`chrome`, `firefox`, `opera`) and set the global `__VENDOR__` variable. <br>**Default:** `chrome`                 |
+| `--vendor`     | Compile the extension for different vendors (`chrome`, `firefox`, `opera`) and set the global `process.env.VENDOR` variable. <br>**Default:** `chrome`                 |
 | `--sourcemaps` | Force the creation of sourcemaps. <br>**Default:** `!production`                                                                                               |
 
 ### Tasks
@@ -141,11 +141,11 @@ This build tool also supports the following predefined variables.
 | Variable                | Description                              |
 |-------------------------|------------------------------------------|
 | `process.env.NODE_ENV`  | will be the same as the development flag |
-| `__VENDOR__`            | will be the same as the vendor flag      |
+| `process.env.VENDOR`    | will be the same as the vendor flag      |
 
 Use them in your code via:
 
-    if(__VENDOR__ === 'firefox'){
+    if(process.env.VENDOR === 'firefox'){
       // To something firefox specific
     }
 
