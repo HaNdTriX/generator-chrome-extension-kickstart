@@ -58,15 +58,16 @@ or
 
 ## Globals
 
-The build tool also defines a variable named `ENV` in your scripts. It will be set to `development` unless you use the `--production` option.
+The build tool also defines a variable named `process.env.NODE_ENV` in your scripts. It will be set to `development` unless you use the `--production` option.
 
 
 **Example:** `./app/background.js`
 
-	if(ENV === 'development'){
-		console.log('We are in development mode!');
-	}
-
+```javascript
+if(process.env.NODE_ENV === 'development'){
+  console.log('We are in development mode!');
+}
+```
 
 
 
