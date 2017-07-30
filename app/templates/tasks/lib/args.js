@@ -24,7 +24,7 @@ const args = yargs
     string: true,
     default: 'chrome',
     describe: 'Compile the extension for different vendors',
-    choices: ['chrome', 'firefox', 'opera']
+    choices: ['chrome', 'firefox', 'opera', 'edge']
   })
 
   .option('sourcemaps', {

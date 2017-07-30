@@ -7,6 +7,7 @@
  *    __chrome__keyName
  *    __firefox__keyName
  *    __opera__keyName
+ *    __edge__keyName
  *
  * to `keyName`.
  * This way we can write one manifest thats valid
@@ -33,7 +34,7 @@ var vendor = ''
  */
 function iterator (obj) {
   Object.keys(obj).forEach((key) => {
-    let match = key.match(/^__(chrome|firefox|opera)__(.*)/)
+    let match = key.match(/^__(chrome|firefox|opera|edge)__(.*)/)
     if (match) {
         // Swap key with non prefixed name
       if (match[1] === vendor) {

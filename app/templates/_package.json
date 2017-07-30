@@ -9,10 +9,12 @@
     "build:chrome": "gulp pack --production --vendor=chrome",
     "build:firefox": "gulp pack --production --vendor=firefox",
     "build:opera": "gulp pack --production --vendor=opera",
+    "build:edge": "gulp pack --production --vendor=edge",
     "dev": "npm run dev:chrome",
     "dev:chrome": "gulp --watch --vendor=chrome",
     "dev:firefox": "gulp --watch --vendor=firefox",
-    "dev:opera": "gulp --watch --vendor=opera"
+    "dev:opera": "gulp --watch --vendor=opera",
+    "dev:edge": "gulp --watch --vendor=edge"
   },
   "devDependencies": {
     "babel-cli": "6.x.x",
