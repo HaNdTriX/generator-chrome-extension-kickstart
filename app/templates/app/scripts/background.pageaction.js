@@ -1,12 +1,12 @@
 // Enable chromereload by uncommenting this line:
-// import 'chromereload/devonly';
+// import 'chromereload/devonly'
 
-chrome.runtime.onInstalled.addListener(function (details) {
+chrome.runtime.onInstalled.addListener((details) => {
   console.log('previousVersion', details.previousVersion)
 })
 
-chrome.tabs.onUpdated.addListener(function (tabId) {
+chrome.tabs.onUpdated.addListener((tabId) => {
   chrome.pageAction.show(tabId)
 })
 
-console.log('\'Allo \'Allo! Event Page for Page Action')
+console.log(`'Allo 'Allo! Event Page for Page Action`)
