@@ -285,13 +285,6 @@ module.exports = class extends Generator {
     )
   }
 
-  eslint () {
-    this.fs.copy(
-      this.templatePath('eslintrc'),
-      this.destinationPath('.eslintrc')
-    )
-  }
-
   babelrc () {
     this.fs.copy(
       this.templatePath('babelrc'),

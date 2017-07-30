@@ -13,9 +13,8 @@ const ENV = args.production ? 'production' : 'development'
 gulp.task('scripts', (cb) => {
   return gulp.src('app/scripts/*.js')
     .pipe(plumber({
-      errorHandler () {
-        // Webpack will log the errors
-      }
+      // Webpack will log the errors
+      errorHandler () {}
     }))
     .pipe(named())
     .pipe(gulpWebpack({
@@ -35,14 +34,7 @@ gulp.task('scripts', (cb) => {
       module: {
         rules: [{
           test: /\.js$/,
-          loader: 'eslint-loader',
-          exclude: /node_modules/,
-          enforce: 'pre'
-        },
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          enforce: 'post'
+          loader: 'babel-loader'
         }]
       }
     },

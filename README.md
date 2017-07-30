@@ -1,6 +1,7 @@
 ![generator-chrome-extension-kickstart](images/chrome-extension-kickstarter-intro.png)
 
 [![Build Status](https://secure.travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart.png?branch=master)](https://travis-ci.org/HaNdTriX/generator-chrome-extension-kickstart) [![npm package](https://badge.fury.io/js/generator-chrome-extension-kickstart.svg)](https://www.npmjs.com/package/generator-chrome-extension-kickstart)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg?style=flat-square)](https://github.com/feross/standard)
 
 Advanced WebExtension generator that creates everything you need to get started with extension development. 
 
