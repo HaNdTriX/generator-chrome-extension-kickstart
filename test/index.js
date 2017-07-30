@@ -57,7 +57,6 @@ describe('chrome-extension-kickstart:app', () => {
     assert.file([
       'package.json',
       '.editorconfig',
-      '.eslintrc',
       '.babelrc',
       '.gitattributes',
       '.gitignore',

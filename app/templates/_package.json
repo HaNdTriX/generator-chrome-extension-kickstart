@@ -14,20 +14,23 @@
     "dev:chrome": "gulp --watch --vendor=chrome",
     "dev:firefox": "gulp --watch --vendor=firefox",
     "dev:opera": "gulp --watch --vendor=opera",
-    "dev:edge": "gulp --watch --vendor=edge"
+    "dev:edge": "gulp --watch --vendor=edge",
+    "lint": "standard"
+  },
+  "standard": {
+    "globals": [
+      "chrome"
+    ]
   },
   "devDependencies": {
     "babel-cli": "6.x.x",
     "babel-core": "6.x.x",
-    "babel-eslint": "7.x.x",
     "babel-loader": "7.x.x",
     "babel-preset-env": "1.x.x",
     "chai": "4.x.x",
     "chromereload": "0.x.x",
     "debounce": "1.x.x",
     "del": "3.x.x",
-    "eslint": "^4.x.x",
-    "eslint-loader": "1.x.x",
     "gulp": "3.x.x",
     "gulp-bump": "2.x.x",
     "gulp-cache": "0.x.x",
@@ -47,6 +50,7 @@
     "gulp-util": "3.x.x",
     "gulp-zip": "^4.x.x",
     "require-dir": "0.x.x",
+    "standard": "^10.0.2",
     "vinyl-named": "1.x.x",
     "webpack": "2.x.x",
     "webpack-stream": "3.x.x",
