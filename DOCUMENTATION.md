@@ -17,11 +17,12 @@
     ├────── popup.css
     ├────── example.less
     ├── dist                    # Compiled extensions
-    ├──── chrome                
-    ├──── firefox               
-    ├──── opera                 
+    ├──── chrome
+    ├──── firefox
+    ├──── opera
+    ├──── edge
     ├── packages                # Packed extensions (.zip)
-    ├── tasks                   # Build system files 
+    ├── tasks                   # Build system files
     ├──── lib
     ├──── build.js
     ├──── clean.js
@@ -46,9 +47,9 @@ You can influence most predefined gulp tasks by adding flags to the gulp command
 | Flag           | Description                                                                                                                                                    |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include `livereload.js` in your bundle.                               |
-| `--production` | Minifies all assets and sets the `process.env.NODE_ENV` variable to `production`                                                                                            |
-| `--verbose`    | Log additional data to the console.                                                                                                                            |
-| `--vendor`     | Compile the extension for different vendors (`chrome`, `firefox`, `opera`) and set the global `process.env.VENDOR` variable. <br>**Default:** `chrome`                 |
+| `--production` | Minifies all assets and sets the `process.env.NODE_ENV` variable to `production`                                                                               |
+| `--verbose`    | Log additional data to the console                                                                                                                             |
+| `--vendor`     | Compile the extension for different vendors (`chrome`, `firefox`, `opera`, `edge`) and set the global `process.env.VENDOR` variable. <br>**Default:** `chrome` |
 | `--sourcemaps` | Force the creation of sourcemaps. <br>**Default:** `!production`                                                                                               |
 
 ### Tasks
@@ -56,19 +57,19 @@ You can influence most predefined gulp tasks by adding flags to the gulp command
 | Variable     | Description                                                                                                                      |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------|
 | default      | alias for `build`                                                                                                                |
-| `build`      | Runs `clean`,  `manifest`, `scripts`, `styles`, `pages`, `locales`, `images`, `fonts` and `livereload` task.                     |
-| `clean`      | Deletes the `dist` directory.                                                                                                    |
-| `style`      | Compiles css, scss and less files in the root of your `app/styles/*` directory.                                                  |
-| `scripts`    | Compiles the scripts in the root of your `app/scripts/*` directory.                                                              |
-| `pages`      | Compiles the html files in the pages directory.                                                                                  |
+| `build`      | Runs `clean`,  `manifest`, `scripts`, `styles`, `pages`, `locales`, `images`, `fonts` and `livereload` task                      |
+| `clean`      | Deletes the `dist` directory                                                                                                     |
+| `style`      | Compiles css, scss and less files in the root of your `app/styles/*` directory                                                   |
+| `scripts`    | Compiles the scripts in the root of your `app/scripts/*` directory                                                               |
+| `pages`      | Compiles the html files in the pages directory                                                                                   |
 | `manifest`   | Compiles the `manifest.json` file and transforms vendor specific keys.                                                           |
-| `locales`    | Copies the `_locales` into `dist`.                                                                                               |
-| `fonts`      | Copies the `fonts` into dist.                                                                                                    |
-| `livereload` | Starts a livereload server and watches all the assets. The `--watch` flag needs to be present in order for this task to work.    |
-| `pack`       | Packs the dist directory into a zip file, adds version number and vendor to it and saves the bundle to the `packages` directory. |
-| `patch`      | Bumbs the patch version in the `manifest.json`,  `package.json`, commits and adds a git tag.                                     |
-| `feature`    | Bumbs the minor version in the `manifest.json`, `package.json`, commits and adds a git tag.                                      |
-| `release`    | Bumbs the major version in the `manifest.json`, `package.json`, commits and adds a git tag.                                      |
+| `locales`    | Copies the `_locales` into `dist`                                                                                                |
+| `fonts`      | Copies the `fonts` into dist                                                                                                     |
+| `livereload` | Starts a livereload server and watches all the assets. The `--watch` flag needs to be present in order for this task to work     |
+| `pack`       | Packs the dist directory into a zip file, adds version number and vendor to it and saves the bundle to the `packages` directory  |
+| `patch`      | Bumbs the patch version in the `manifest.json`,  `package.json`, commits and adds a git tag                                      |
+| `feature`    | Bumbs the minor version in the `manifest.json`, `package.json`, commits and adds a git tag                                       |
+| `release`    | Bumbs the major version in the `manifest.json`, `package.json`, commits and adds a git tag                                       |
 
 **Example:**
 
@@ -92,17 +93,18 @@ This generator supports the following vendors:
   * `chrome` <small>(default)</small>
   * `firefox`
   * `opera`
+  * `edge`
 
 To build the extension for Firefox type:
 
     $ gulp build --vendor=firefox
-  
+
 This will generate a new directory under: `dist/firefox`.
 If you want to pack this directory, simply type:
 
     $ gulp pack --vendor=firefox
 
-into your Terminal. 
+into your Terminal.
 This will create a new archive in the `packages` directory.
 
 ### manifest.json
@@ -112,7 +114,7 @@ For example every vendor will have its own extension key.
 
 Therefore the build tool supports vendor prefix keys in the `manifest.json` that will be converted to the orgional key in the build process.
 
-**Example:** 
+**Example:**
 
 `app/manifest.json`
 
@@ -122,7 +124,7 @@ Therefore the build tool supports vendor prefix keys in the `manifest.json` that
        "__opera__key": "operaExtensionKey",
        ...
     }
-  
+
 Running `$ gulp manifest --vendor=chrome` will create the following `manifest.json` file.
 
     {
@@ -136,7 +138,7 @@ Running `$ gulp manifest --vendor=chrome` will create the following `manifest.js
 
 ### Predefined variables
 
-This build tool also supports the following predefined variables. 
+This build tool also supports the following predefined variables.
 
 | Variable                | Description                              |
 |-------------------------|------------------------------------------|
