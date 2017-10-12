@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 const Generator = require('yeoman-generator')
 const path = require('path')
-const slug = require('slug')
+const slugify = require('slugify')
 const yosay = require('yosay')
 
 module.exports = class extends Generator {
@@ -257,7 +257,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('_package.json'),
       this.destinationPath('package.json'), {
-        name: slug(this.appname),
+        name: slugify(this.appname),
         description: this.manifest.description
       }
     )
