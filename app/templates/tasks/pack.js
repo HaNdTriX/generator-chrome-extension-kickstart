@@ -8,6 +8,8 @@ function getPackFileType () {
   switch (args.vendor) {
     case 'firefox':
       return '.xpi'
+    case 'opera':
+      return '.crx'
     default:
       return '.zip'
   }
