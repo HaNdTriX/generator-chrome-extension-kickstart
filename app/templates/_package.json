@@ -35,8 +35,8 @@
     "gulp-bump": "2.x.x",
     "gulp-cache": "0.x.x",
     "gulp-clean-css": "^3.x.x",
-    "gulp-filter": "^5.x.x",
-    "gulp-git": "^2.x.x",
+    "gulp-filter": "5.x.x",
+    "gulp-git": "2.x.x",
     "gulp-if": "2.x.x",
     "gulp-imagemin": "3.x.x",
     "gulp-json-transform": "0.x.x",
@@ -48,12 +48,12 @@
     "gulp-sourcemaps": "^2.x.x",
     "gulp-tag-version": "1.x.x",
     "gulp-util": "3.x.x",
-    "gulp-zip": "^4.x.x",
+    "gulp-zip": "4.x.x",
     "require-dir": "0.x.x",
-    "standard": "^10.0.2",
+    "standard": "10.x.x",
     "vinyl-named": "1.x.x",
     "webpack": "3.x.x",
-    "webpack-stream": "3.x.x",
-    "yargs": "^8.x.x"
+    "webpack-stream": "4.x.x",
+    "yargs": "9.x.x"
   }
 }
