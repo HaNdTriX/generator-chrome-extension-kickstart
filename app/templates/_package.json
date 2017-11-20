@@ -20,16 +20,15 @@
   "standard": {
     "globals": [
       "chrome"
-    ]
+    ],
+    "parser": "babel-eslint"
   },
   "devDependencies": {
     "babel-cli": "6.x.x",
     "babel-core": "6.x.x",
     "babel-loader": "7.x.x",
     "babel-preset-env": "1.x.x",
-    "chai": "4.x.x",
     "chromereload": "0.x.x",
-    "debounce": "1.x.x",
     "del": "3.x.x",
     "gulp": "3.x.x",
     "gulp-bump": "2.x.x",
