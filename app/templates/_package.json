@@ -28,6 +28,7 @@
     "babel-core": "6.x.x",
     "babel-loader": "7.x.x",
     "babel-preset-env": "1.x.x",
+    "babili-webpack-plugin": "0.x.x",
     "chromereload": "0.x.x",
     "del": "3.x.x",
     "gulp": "3.x.x",

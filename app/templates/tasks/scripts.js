@@ -4,6 +4,7 @@ import { log, colors } from 'gulp-util'
 import named from 'vinyl-named'
 import webpack from 'webpack'
 import gulpWebpack from 'webpack-stream'
+import BabiliPlugin from 'babili-webpack-plugin'
 import plumber from 'gulp-plumber'
 import livereload from 'gulp-livereload'
 import args from './lib/args'
@@ -26,7 +27,7 @@ gulp.task('scripts', (cb) => {
           'process.env.VENDOR': JSON.stringify(args.vendor)
         })
       ].concat(args.production ? [
-        new webpack.optimize.UglifyJsPlugin()
+        new BabiliPlugin()
       ] : []),
       module: {
         rules: [{
